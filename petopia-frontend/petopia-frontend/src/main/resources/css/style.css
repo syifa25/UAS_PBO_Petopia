@@ -1,14 +1,608 @@
-.root {
-    -fx-background-color: #c49a5a;
+/* =====================
+   GLOBAL
+   ===================== */
+* {
+    -fx-font-family: "Courier New", monospace;
 }
 
-.title {
-    -fx-font-size: 42px;
+/* =====================
+   ROOT BACKGROUND
+   ===================== */
+.root-bg {
+    -fx-background-color: #C8A86B;
+}
+
+/* =====================
+   NAVBAR
+   ===================== */
+.navbar {
+    -fx-background-color: #B08030;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 0 0 4 0;
+    -fx-padding: 0 60 0 60;
+    -fx-min-height: 52;
+    -fx-pref-height: 52;
+}
+
+.nav-item {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 4 4 4 4;
+    -fx-background-color: transparent;
+}
+
+.nav-active {
+    -fx-underline: true;
+}
+
+/* =====================
+   MAIN CONTENT
+   ===================== */
+.main-content {
+    -fx-padding: 14 20 14 20;
+    -fx-background-color: #C8A86B;
+}
+
+/* =====================
+   ARENA BOX
+   ===================== */
+.arena-box {
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 4;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-background-color: #7EC8E3;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 6, 0, 3, 3);
+}
+
+.arena-sky {
+    -fx-background-color: #7EC8E3;
+    -fx-min-height: 300;
+}
+
+.arena-ground {
+    -fx-background-color: #5A8A2A;
+    -fx-border-color: #3A6010;
+    -fx-border-width: 4 0 0 0;
+    -fx-min-height: 50;
+    -fx-pref-height: 50;
+}
+
+/* =====================
+   ARENA TITLE
+   ===================== */
+.arena-title {
+    -fx-text-fill: #FF9900;
+    -fx-font-size: 44px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+    -fx-effect: dropshadow(one-pass-box, #7A4400, 0, 3, 3, 0);
+}
+
+/* =====================
+   CLOUDS
+   ===================== */
+.cloud {
+    -fx-background-color: white;
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-effect: dropshadow(one-pass-box, #bbbbbb, 4, 0, 1, 2);
+}
+
+/* =====================
+   PLATFORM
+   ===================== */
+.platform-top {
+    -fx-background-color: #C8A86B;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 2;
+}
+
+.platform-bottom {
+    -fx-background-color: #906820;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 0 2 2 2;
+}
+
+/* =====================
+   WELCOME TEXT
+   ===================== */
+.welcome-text {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
 
-.battle-button {
-    -fx-background-color: #f7a81b;
+/* =====================
+   PET SELECTOR
+   ===================== */
+.pet-selector-box {
+    -fx-background-color: #B08030;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 4;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 12 14 12 14;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 4, 0, 2, 2);
+}
+
+.selector-label {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.pet-btn {
+    -fx-background-color: #C8A86B;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 3;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-padding: 2;
+}
+
+.pet-btn:hover {
+    -fx-background-color: #D8B87A;
+    -fx-border-color: #3A1F00;
+}
+
+.pet-btn-selected {
+    -fx-background-color: #F0D080;
+    -fx-border-color: #3A1F00;
+    -fx-border-width: 3;
+    -fx-effect: dropshadow(one-pass-box, #3A1F00, 4, 0, 0, 0);
+}
+
+/* =====================
+   BATTLE BUTTON
+   ===================== */
+.battle-btn {
+    -fx-background-color: #F0A000;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 4;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 5, 0, 2, 4);
+}
+
+.battle-btn:hover {
+    -fx-background-color: #FFB820;
+}
+
+.battle-btn:pressed {
+    -fx-background-color: #CC8800;
+    -fx-translate-y: 2;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 2, 0, 1, 1);
+}
+
+.battle-icon {
+    -fx-font-size: 28px;
+}
+
+.battle-label {
+    -fx-text-fill: #3A1F00;
     -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+/* ===== NAVBAR BUTTON (ganti nav-item) ===== */
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #3A1F00;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 6 10 6 10;
+}
+
+.nav-btn:hover {
+    -fx-background-color: rgba(0,0,0,0.1);
+    -fx-background-radius: 4;
+}
+
+.nav-active {
+    -fx-underline: true;
+    -fx-border-color: transparent transparent #3A1F00 transparent;
+    -fx-border-width: 0 0 2 0;
+}
+/* =====================
+   HOW TO PLAY
+   ===================== */
+.howto-btn {
+    -fx-background-color: #B08030;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 4;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 5, 0, 2, 4);
+}
+
+.howto-btn:hover {
+    -fx-background-color: #C8A240;
+}
+
+.howto-btn:pressed {
+    -fx-background-color: #906820;
+    -fx-translate-y: 2;
+}
+
+.howto-icon {
+    -fx-font-size: 22px;
+}
+
+.howto-label {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+/* =====================
+   MY PETS ROOT
+   ===================== */
+.mypets-root {
+    -fx-background-color: #1A0E05;
+}
+
+/* =====================
+   WOOD PANEL
+   ===================== */
+.wood-panel {
+    -fx-background-color: #3D2010;
+    -fx-border-color: #C8A040, #8B6010, #C8A040;
+    -fx-border-width: 5;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 24 24 24 24;
+    -fx-effect: dropshadow(gaussian, #000000, 20, 0.5, 0, 4);
+}
+
+/* =====================
+   MY PETS TITLE
+   ===================== */
+.mypets-title {
+    -fx-text-fill: #FFD700;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(one-pass-box, #7A4400, 0, 3, 3, 0);
+}
+
+.mypets-subtitle {
+    -fx-text-fill: #C8A040;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* =====================
+   PET CARD
+   ===================== */
+.pet-card {
+    -fx-background-color: #C8A86B;
+    -fx-border-color: #8B6010;
+    -fx-border-width: 4;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-effect: dropshadow(one-pass-box, #000000, 6, 0.3, 2, 2);
+}
+
+/* Image area backgrounds */
+.card-img-area-grass {
+    -fx-background-color: #7EC8E3;
+    -fx-background-radius: 3 3 0 0;
+}
+.card-img-area-sand {
+    -fx-background-color: #E8D080;
+    -fx-background-radius: 3 3 0 0;
+}
+.card-img-area-stone {
+    -fx-background-color: #9098A8;
+    -fx-background-radius: 3 3 0 0;
+}
+
+.card-sky-blue    { -fx-background-color: #7EC8E3; }
+.card-sky-sand    { -fx-background-color: #E8D080; }
+.card-sky-stone   { -fx-background-color: #9098A8; }
+
+.card-ground-green {
+    -fx-background-color: #5A8A2A;
+    -fx-border-color: #3A6010;
+    -fx-border-width: 3 0 0 0;
+}
+.card-ground-sand {
+    -fx-background-color: #C8A040;
+    -fx-border-color: #906010;
+    -fx-border-width: 3 0 0 0;
+}
+.card-ground-stone {
+    -fx-background-color: #606870;
+    -fx-border-color: #404850;
+    -fx-border-width: 3 0 0 0;
+}
+
+/* =====================
+   STATUS BADGES
+   ===================== */
+.badge {
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 8 3 8;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+}
+.badge-ready    { -fx-background-color: #28B428; -fx-text-fill: white; }
+.badge-resting  { -fx-background-color: #E07020; -fx-text-fill: white; }
+.badge-training { -fx-background-color: #2888D8; -fx-text-fill: white; }
+
+/* =====================
+   CARD INFO
+   ===================== */
+.card-info {
+    -fx-background-color: #C8A86B;
+    -fx-padding: 10 12 8 12;
+    -fx-border-color: #8B6010;
+    -fx-border-width: 2 0 0 0;
+}
+
+.card-info-text {
+    -fx-text-fill: #2A1200;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.card-status-ready    { -fx-text-fill: #28B428; }
+.card-status-resting  { -fx-text-fill: #E07020; }
+.card-status-training { -fx-text-fill: #2888D8; }
+
+/* =====================
+   ACTION BUTTONS
+   ===================== */
+.card-actions {
+    -fx-background-color: #A07030;
+    -fx-border-color: #8B6010;
+    -fx-border-width: 3 0 0 0;
+    -fx-padding: 8 10 8 10;
+    -fx-background-radius: 0 0 3 3;
+}
+
+.act-btn {
+    -fx-background-color: #C8A86B;
+    -fx-border-color: #7A5010;
+    -fx-border-width: 3;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-cursor: hand;
+    -fx-pref-width: 68;
+    -fx-pref-height: 42;
+    -fx-effect: dropshadow(one-pass-box, #5A3000, 3, 0, 1, 2);
+}
+
+.act-btn:hover {
+    -fx-background-color: #D8B870;
+    -fx-border-color: #3A1800;
+}
+
+.act-btn:pressed {
+    -fx-background-color: #906820;
+    -fx-translate-y: 2;
+    -fx-effect: none;
+}
+
+.act-icon  { -fx-font-size: 15px; }
+.act-label {
+    -fx-text-fill: #2A1200;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+
+/* =====================
+   GO TO ARENA BUTTON
+   ===================== */
+.go-arena-btn {
+    -fx-background-color: #F0A000;
+    -fx-border-color: #8B6010;
+    -fx-border-width: 4;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #5A3000, 6, 0, 2, 4);
+}
+
+.go-arena-btn:hover  { -fx-background-color: #FFB820; }
+.go-arena-btn:pressed {
+    -fx-background-color: #C07800;
+    -fx-translate-y: 2;
+    -fx-effect: none;
+}
+
+.go-arena-label {
+    -fx-text-fill: #2A1200;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.go-arena-icon { -fx-font-size: 28px; }
+
+/* =====================
+   NAV WWW SPECIAL
+   ===================== */
+.nav-www {
+    -fx-text-fill: #FFD700;
+}
+/* =====================
+   ARENA PAGE
+   ===================== */
+.arena-page-title {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(one-pass-box, #000000, 0, 3, 3, 0);
+}
+
+.arena-subtitle {
+    -fx-text-fill: #C8A040;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* =====================
+   FIGHTER CARD
+   ===================== */
+.fighter-card {
+    -fx-border-color: #5A3A10;
+    -fx-border-width: 4;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-background-color: #2A1A08;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #000000, 8, 0.4, 2, 2);
+}
+
+.fighter-card:hover {
+    -fx-border-color: #C8A040;
+    -fx-effect: dropshadow(gaussian, #C8A040, 12, 0.3, 0, 0);
+}
+
+.fighter-card-selected {
+    -fx-border-color: #FFD700;
+    -fx-border-width: 4;
+    -fx-background-color: #C8A020;
+    -fx-effect: dropshadow(gaussian, #FFD700, 14, 0.5, 0, 0);
+}
+
+/* =====================
+   FIGHTER IMAGE AREA BACKGROUNDS
+   (berbeda dari background utama)
+   ===================== */
+.fighter-img-area {
+    -fx-background-radius: 4 4 0 0;
+}
+
+/* Card 1 - coklat hangat */
+.fighter-bg-brown {
+    -fx-background-color: #6B3A1F;
+    -fx-background-radius: 4 4 0 0;
+}
+
+/* Card 2 - coklat gelap */
+.fighter-bg-dark {
+    -fx-background-color: #3D2010;
+    -fx-background-radius: 4 4 0 0;
+}
+
+/* Card 3 - biru teal gelap */
+.fighter-bg-teal {
+    -fx-background-color: #1A3A3A;
+    -fx-background-radius: 4 4 0 0;
+}
+
+/* =====================
+   STAT VALUES
+   ===================== */
+.stat-value {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* =====================
+   FIGHTER CARD INFO
+   ===================== */
+.fighter-card-info {
+    -fx-background-color: #1A0E05;
+    -fx-border-color: #5A3A10;
+    -fx-border-width: 2 0 0 0;
+    -fx-padding: 8 10 8 10;
+    -fx-background-radius: 0 0 4 4;
+}
+
+.fighter-card-selected .fighter-card-info {
+    -fx-background-color: #8B6010;
+}
+
+.fighter-name {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.fighter-level {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.fighter-sep {
+    -fx-text-fill: #888888;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+}
+
+.fighter-status-ready {
+    -fx-text-fill: #28DD28;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.fighter-status-resting {
+    -fx-text-fill: #FF8C00;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.fighter-status-training {
+    -fx-text-fill: #40A8FF;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* =====================
+   BACK TO HOME BUTTON
+   ===================== */
+.back-home-btn {
+    -fx-background-color: #C8800A;
+    -fx-border-color: #8B5A00;
+    -fx-border-width: 4;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #5A3000, 6, 0, 2, 4);
+}
+
+.back-home-btn:hover  { -fx-background-color: #E09020; }
+.back-home-btn:pressed {
+    -fx-background-color: #A06000;
+    -fx-translate-y: 2;
+    -fx-effect: none;
+}
+
+.back-icon {
+    -fx-text-fill: #2A1200;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.back-label {
+    -fx-text-fill: #2A1200;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
