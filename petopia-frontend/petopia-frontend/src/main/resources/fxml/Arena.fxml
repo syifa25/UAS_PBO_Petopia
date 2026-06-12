@@ -1,20 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
 
-<VBox alignment="CENTER" spacing="20"
-      xmlns="http://javafx.com/javafx/25"
-      xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.petopia.controller.ArenaController"
+      styleClass="root-bg"
+      prefWidth="1000" prefHeight="700"
+      alignment="CENTER">
 
-    <Label text="⚔ ARENA BATTLE"
-           style="-fx-font-size: 32px; -fx-font-weight: bold;"/>
+    <!-- NAVBAR -->
+    <HBox styleClass="navbar" alignment="CENTER" spacing="80" prefHeight="52">
+        <Button fx:id="navHome" text="HOME" styleClass="nav-btn"/>
+        <Button fx:id="navMyPets" text="MY PETS" styleClass="nav-btn"/>
+        <Button fx:id="navMarketplace" text="MARKETPLACE" styleClass="nav-btn"/>
+        <Button fx:id="navWWW" text="⚜ WWW" styleClass="nav-btn nav-www"/>
+    </HBox>
 
-    <Label text="Risol Mayo Cat VS Beruang"/>
+    <!-- CENTER CONTENT -->
+    <VBox VBox.vgrow="ALWAYS" alignment="CENTER" spacing="16">
 
-    <Button text="ATTACK"/>
-    <Button text="USE POTION"/>
-    <Button text="FLEE"/>
+        <!-- TITLE ROW -->
+        <HBox alignment="CENTER" spacing="16">
+            <ImageView fx:id="swordIconLeft"
+                       fitWidth="36" fitHeight="36" preserveRatio="true"/>
+            <Label text="ARENA" styleClass="arena-page-title"/>
+            <ImageView fx:id="swordIconRight"
+                       fitWidth="36" fitHeight="36" preserveRatio="true"/>
+        </HBox>
 
+        <Label text="CHOOSE YOUR FIGHTER, TRAINER!"
+               styleClass="arena-subtitle"/>
+
+        <!-- FIGHTER CARDS -->
+        <HBox spacing="20" alignment="CENTER">
+
+            <!-- CARD 1 - SELECTED -->
+            <VBox fx:id="card1" styleClass="fighter-card fighter-card-selected"
+                  prefWidth="210" spacing="0"
+                  alignment="CENTER"
+                  onMouseClicked="#selectCard1">
+
+                <!-- Pet image area with own background -->
+                <StackPane styleClass="fighter-img-area" prefWidth="210" prefHeight="170">
+                    <Pane styleClass="fighter-bg-brown" prefWidth="210" prefHeight="170"/>
+                    <ImageView fx:id="fighter1Image"
+                               fitWidth="110" fitHeight="110"
+                               preserveRatio="true"
+                               StackPane.alignment="CENTER"/>
+                    <!-- Stats top right -->
+                    <VBox StackPane.alignment="TOP_RIGHT"
+                          translateX="-8" translateY="8" spacing="5">
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="swordStat1"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="protectStat1"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="loveStat1"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                    </VBox>
+                </StackPane>
+
+                <!-- Name & Status -->
+                <VBox styleClass="fighter-card-info" prefWidth="210"
+                      alignment="CENTER_LEFT" spacing="2">
+                    <Label text="RISSOLE CAT" styleClass="fighter-name"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="LV.15" styleClass="fighter-level"/>
+                        <Label text="|" styleClass="fighter-sep"/>
+                        <Label text="READY" styleClass="fighter-status-ready"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- CARD 2 -->
+            <VBox fx:id="card2" styleClass="fighter-card"
+                  prefWidth="210" spacing="0"
+                  alignment="CENTER"
+                  onMouseClicked="#selectCard2">
+
+                <StackPane styleClass="fighter-img-area" prefWidth="210" prefHeight="170">
+                    <Pane styleClass="fighter-bg-dark" prefWidth="210" prefHeight="170"/>
+                    <ImageView fx:id="fighter2Image"
+                               fitWidth="110" fitHeight="110"
+                               preserveRatio="true"
+                               StackPane.alignment="CENTER"/>
+                    <VBox StackPane.alignment="TOP_RIGHT"
+                          translateX="-8" translateY="8" spacing="5">
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="swordStat2"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="protectStat2"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="loveStat2"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                    </VBox>
+                </StackPane>
+
+                <VBox styleClass="fighter-card-info" prefWidth="210"
+                      alignment="CENTER_LEFT" spacing="2">
+                    <Label text="GRIZZLY BEAR" styleClass="fighter-name"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="LV.12" styleClass="fighter-level"/>
+                        <Label text="|" styleClass="fighter-sep"/>
+                        <Label text="RESTING" styleClass="fighter-status-resting"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- CARD 3 -->
+            <VBox fx:id="card3" styleClass="fighter-card"
+                  prefWidth="210" spacing="0"
+                  alignment="CENTER"
+                  onMouseClicked="#selectCard3">
+
+                <StackPane styleClass="fighter-img-area" prefWidth="210" prefHeight="170">
+                    <Pane styleClass="fighter-bg-teal" prefWidth="210" prefHeight="170"/>
+                    <ImageView fx:id="fighter3Image"
+                               fitWidth="110" fitHeight="110"
+                               preserveRatio="true"
+                               StackPane.alignment="CENTER"/>
+                    <VBox StackPane.alignment="TOP_RIGHT"
+                          translateX="-8" translateY="8" spacing="5">
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="swordStat3"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="protectStat3"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                        <HBox spacing="4" alignment="CENTER_RIGHT">
+                            <ImageView fx:id="loveStat3"
+                                       fitWidth="14" fitHeight="14" preserveRatio="true"/>
+                            <Label text="1" styleClass="stat-value"/>
+                        </HBox>
+                    </VBox>
+                </StackPane>
+
+                <VBox styleClass="fighter-card-info" prefWidth="210"
+                      alignment="CENTER_LEFT" spacing="2">
+                    <Label text="AQUA SLIME" styleClass="fighter-name"/>
+                    <HBox spacing="6" alignment="CENTER_LEFT">
+                        <Label text="LV.5" styleClass="fighter-level"/>
+                        <Label text="|" styleClass="fighter-sep"/>
+                        <Label text="IN TRAINING" styleClass="fighter-status-training"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+        </HBox>
+
+        <!-- BACK TO HOME -->
+        <Button fx:id="backHomeBtn" styleClass="back-home-btn"
+                prefWidth="240" prefHeight="54"
+                onAction="#goToHome">
+            <graphic>
+                <HBox alignment="CENTER" spacing="10">
+                    <Label text="←" styleClass="back-icon"/>
+                    <Label text="BACK TO HOME" styleClass="back-label"/>
+                </HBox>
+            </graphic>
+        </Button>
+
+    </VBox>
 </VBox>
