@@ -1,22 +1,34 @@
 package com.petopia.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class HomeController {
 
-    @FXML private Button homeButton;
-    @FXML private Button myPetsButton;
-    @FXML private Button marketplaceButton;
-    @FXML private Button battleButton;
-    @FXML private Button howToPlayButton;
+    @FXML
+    private Button battleButton;
 
-    @FXML private Button catPetButton;
-    @FXML private Button dogPetButton;
-    @FXML private Button birdPetButton;
-    @FXML private Button slimePetButton;
+    @FXML
+    public void initialize() {
 
-    @FXML private ImageView playerPetImage;
-    @FXML private ImageView enemyImage;
+        battleButton.setOnAction(event -> {
+            try {
+
+                FXMLLoader loader =
+                        new FXMLLoader(getClass().getResource("/fxml/Arena.fxml"));
+
+                Stage stage = (Stage) battleButton.getScene().getWindow();
+
+                Scene scene = new Scene(loader.load());
+
+                stage.setScene(scene);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
