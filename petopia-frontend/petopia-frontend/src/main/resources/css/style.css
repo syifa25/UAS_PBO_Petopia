@@ -1,0 +1,14 @@
+.root {
+    -fx-background-color: #c49a5a;
+}
+
+.title {
+    -fx-font-size: 42px;
+    -fx-font-weight: bold;
+}
+
+.battle-button {
+    -fx-background-color: #f7a81b;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}

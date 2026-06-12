@@ -1,20 +1,19 @@
 package com.petopia;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
     @Override
-    public void start(Stage stage) {
-        Label label = new Label("Welcome to Petopia!");
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
+        Scene scene = new Scene(loader.load(), 1000, 700);
 
-        StackPane root = new StackPane(label);
-
-        Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(
+                getClass().getResource("/css/style.css").toExternalForm()
+        );
 
         stage.setTitle("Petopia");
         stage.setScene(scene);

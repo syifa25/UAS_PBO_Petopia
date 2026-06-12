@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/25"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.petopia.controller.HomeController"
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: #c49a5a;">
+
+    <top>
+        <HBox alignment="CENTER" spacing="50" style="-fx-padding: 20;">
+            <Button fx:id="homeButton" text="HOME"/>
+            <Button fx:id="myPetsButton" text="MY PETS"/>
+            <Button fx:id="marketplaceButton" text="MARKETPLACE"/>
+            <Label text="👑 UMRI"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="18">
+            <Label text="PETOPIA" style="-fx-font-size: 44px; -fx-font-weight: bold;"/>
+
+            <Pane prefWidth="750" prefHeight="280"
+                  style="-fx-background-color: #83c9e6; -fx-border-color: #3b2a1e; -fx-border-width: 4;">
+
+                <ImageView fx:id="playerPetImage" fitWidth="110" fitHeight="110"
+                           layoutX="95" layoutY="110" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/risol_mayo_cat.png"/>
+                    </image>
+                </ImageView>
+
+                <ImageView fx:id="enemyImage" fitWidth="120" fitHeight="120"
+                           layoutX="570" layoutY="105" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/beruang.png"/>
+                    </image>
+                </ImageView>
+
+                <Label text="PETOPIA"
+                       layoutX="310" layoutY="25"
+                       style="-fx-font-size: 34px; -fx-font-weight: bold;"/>
+
+                <Label text="🌱 ARENA"
+                       layoutX="315" layoutY="220"
+                       style="-fx-font-size: 24px;"/>
+            </Pane>
+
+            <Label text="WELCOME TO THE ARENA, TRAINER UMRI! SELECT YOUR PET TO START THE BATTLE!"
+                   wrapText="true"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="30" style="-fx-padding: 30;">
+
+            <HBox spacing="10" style="-fx-background-color: #d9bc92; -fx-padding: 15;">
+                <Button fx:id="catPetButton">
+                    <graphic>
+                        <ImageView fitWidth="35" fitHeight="35" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/risol_mayo_cat.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="dogPetButton">
+                    <graphic>
+                        <ImageView fitWidth="35" fitHeight="35" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/guguk.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="birdPetButton">
+                    <graphic>
+                        <ImageView fitWidth="35" fitHeight="35" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/burung.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+
+                <Button fx:id="slimePetButton">
+                    <graphic>
+                        <ImageView fitWidth="35" fitHeight="35" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/slime_ijo.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </HBox>
+
+            <Button fx:id="battleButton"
+                    text="⚔ BATTLE START!"
+                    prefWidth="300" prefHeight="70"
+                    style="-fx-background-color: orange; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+            <Button fx:id="howToPlayButton"
+                    text="📜 HOW TO PLAY"
+                    prefWidth="180" prefHeight="60"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
