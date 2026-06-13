@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petopia - Pet Battle Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <nav class="navbar">
+            <button class="nav-btn active" onclick="navigateTo('home')">HOME</button>
+            <button class="nav-btn" onclick="navigateTo('mypets')">MY PETS</button>
+            <button class="nav-btn" onclick="navigateTo('marketplace')">MARKETPLACE</button>
+            <button class="nav-btn nav-login-btn" onclick="handleNavLoginClick()">LOGIN</button>
+        </nav>
+        
+        <div class="main-content">
+            <!-- Arena Preview Box -->
+            <div class="arena-box">
+                <div class="arena-sky">
+                    <h1 class="arena-title">PETOPIA</h1>
+                    
+                    <!-- Clouds -->
+                    <div class="cloud cloud-left"></div>
+                    <div class="cloud cloud-right"></div>
+                    
+                    <!-- Player Pet -->
+                    <div class="player-pet-preview" id="home-player-pet">
+                        <img src="images/pet1.png" class="home-pet-image" alt="Player Pet">
+                    </div>
+                    
+                    <!-- Enemy Pet with Platform -->
+                    <div class="enemy-pet-preview">
+                        <div class="enemy-sprite" id="home-enemy-pet">
+                            <img src="images/enemy.png" class="home-pet-image" alt="Enemy">
+                        </div>
+                        <div class="platform-top"></div>
+                        <div class="platform-bottom"></div>
+                    </div>
+                </div>
+                
+                <div class="arena-ground"></div>
+            </div>
+            
+            <!-- Welcome Text -->
+            <p class="welcome-text">WELCOME TO THE ARENA, TRAINER! SELECT YOUR PET TO START THE BATTLE!</p>
+            
+            <!-- Bottom Controls -->
+            <div class="home-controls">
+                <!-- Pet Selector -->
+                <div class="pet-selector-box">
+                    <label class="selector-label">SELECT YOUR PET</label>
+                    <div class="pet-buttons">
+                        <button class="pet-btn selected" data-pet="0" onclick="selectHomePet(0)">
+                            <img src="images/pet1.png" class="pet-btn-image" alt="Pet 1">
+                        </button>
+                        <button class="pet-btn" data-pet="1" onclick="selectHomePet(1)">
+                            <img src="images/pet2.png" class="pet-btn-image" alt="Pet 2">
+                        </button>
+                        <button class="pet-btn" data-pet="2" onclick="selectHomePet(2)">
+                            <img src="images/pet3.png" class="pet-btn-image" alt="Pet 3">
+                        </button>
+                        <button class="pet-btn" data-pet="3" onclick="selectHomePet(3)">
+                            <img src="images/burung.png" class="pet-btn-image" alt="Pet 4">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Battle Start Button -->
+                <button class="battle-btn pulse-btn" onclick="navigateTo('arena')" style="border: 3px solid #FFD700; box-shadow: 0 0 20px rgba(255,107,0,0.6);">
+                    <div class="btn-content">
+                        <span class="battle-icon" style="font-size: 36px; margin-right: 10px; filter: drop-shadow(0 0 8px #FF6B00);">⚔️</span>
+                        <span class="battle-label" style="text-shadow: 2px 2px 0 #A00;">BATTLE<br>START!</span>
+                    </div>
+                </button>
+                
+                <!-- How to Play Button -->
+                <button class="howto-btn" onclick="showHowToPlay()">
+                    <div class="btn-content-vertical">
+                        <span class="howto-icon">📋</span>
+                        <span class="howto-label">HOW TO<br>PLAY</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==============================================
+         AUTH PAGE (LOGIN / REGISTER)
+         ============================================== -->
+    <div id="auth-page" class="page">
+        <div class="auth-container">
+            <!-- Login Section -->
+            <div class="auth-card" id="login-section">
+                <div class="auth-header">
+                    <h2 class="auth-title">PLAYER LOGIN</h2>
+                    <p class="auth-subtitle">WELCOME BACK TO PETOPIA</p>
+                </div>
+                
+                <form class="auth-form" onsubmit="handleLoginSubmit(event)">
+                    <div id="login-register-hint" style="display: none; text-align: center; color: #FF8C00; font-size: 10px; font-family: 'Orbitron', sans-serif; background: rgba(255, 140, 0, 0.1); padding: 8px; border-radius: 4px; border: 1px dashed #FF8C00;">
+                        ⚠️ Note: You MUST register a new account first below before you can login!
+                    </div>
+                    <div class="form-group">
+                        <label for="login-username">USERNAME</label>
+                        <input type="text" id="login-username" class="arcade-input" placeholder="ENTER USERNAME..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">PASSWORD</label>
+                        <input type="password" id="login-password" class="arcade-input" placeholder="ENTER PASSWORD..." required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn pulse-btn">PRESS START ▶</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>NEW PLAYER? <span class="auth-link" onclick="toggleAuthMode('register')">INSERT COIN TO JOIN</span></p>
+                </div>
+            </div>
+
+            <!-- Register Section -->
+            <div class="auth-card" id="register-section" style="display: none; border-color: #FF5050; box-shadow: 0 0 30px rgba(255, 80, 80, 0.5), inset 0 0 20px rgba(255, 80, 80, 0.2);">
+                <div class="auth-header" style="border-color: #FF5050; background: linear-gradient(135deg, #1A0E05 0%, #4a0a0a 100%);">
+                    <h2 class="auth-title" style="color: #FF8C00; text-shadow: 3px 3px 0 #8a0a0a;">NEW PLAYER</h2>
+                    <p class="auth-subtitle" style="color: #FFB0B0;">CREATE YOUR ACCOUNT</p>
+                </div>
+                
+                <form class="auth-form" onsubmit="handleRegisterSubmit(event)">
+                    <div class="form-group">
+                        <label for="reg-username">USERNAME</label>
+                        <input type="text" id="reg-username" class="arcade-input" style="border-color: #8a0a0a;" placeholder="CHOOSE A NAME..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">EMAIL</label>
+                        <input type="email" id="reg-email" class="arcade-input" style="border-color: #8a0a0a;" placeholder="ENTER EMAIL..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">PASSWORD</label>
+                        <input type="password" id="reg-password" class="arcade-input" style="border-color: #8a0a0a;" placeholder="CREATE PASSWORD..." required>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn pulse-btn" style="background: linear-gradient(135deg, #FF5050 0%, #a00 100%); border-color: #FF8C00; box-shadow: 0 6px 0 #600, 0 10px 20px rgba(0,0,0,0.5);">CREATE ACCOUNT ⚡</button>
+                </form>
+                
+                <div class="auth-footer" style="border-top-color: rgba(255, 80, 80, 0.3);">
+                    <p>ALREADY HAVE AN ACCOUNT? <span class="auth-link" style="color: #FF8C00;" onclick="toggleAuthMode('login')">LOGIN HERE</span></p>
+                </div>
+            </div>
+            
+            <button class="back-btn" onclick="navigateTo('home')" style="margin-top: 20px;">
+                <span class="btn-icon">←</span>
+                BACK TO HOME
+            </button>
+        </div>
+    </div>
+
+    <!-- Arena Selection Page -->
+    <div id="arena-page" class="page">
+        <nav class="navbar">
+            <button class="nav-btn" onclick="navigateTo('home')">HOME</button>
+            <button class="nav-btn active">ARENA</button>
+            <button class="nav-btn" onclick="navigateTo('my-pets')">MY PETS</button>
+            <button class="nav-btn" onclick="navigateTo('marketplace')">MARKETPLACE</button>
+        </nav>
+        
+        <div class="main-content content-center">
+            <div class="arena-header">
+                <span class="sword-icon">⚔️</span>
+                <h1 class="arena-page-title">ARENA</h1>
+                <span class="sword-icon">⚔️</span>
+            </div>
+            <p class="arena-subtitle">CHOOSE YOUR FIGHTER, TRAINER!</p>
+            
+            <!-- Level Selector -->
+            <div class="level-selector">
+                <label class="level-label">SELECT DIFFICULTY LEVEL:</label>
+                <div class="level-buttons">
+                    <button class="level-btn selected" data-level="1" onclick="selectLevel(1)">
+                        <div class="level-num">1</div>
+                        <div class="level-diff">EASY</div>
+                    </button>
+                    <button class="level-btn" data-level="2" onclick="selectLevel(2)">
+                        <div class="level-num">2</div>
+                        <div class="level-diff">NORMAL</div>
+                    </button>
+                    <button class="level-btn" data-level="3" onclick="selectLevel(3)">
+                        <div class="level-num">3</div>
+                        <div class="level-diff">MEDIUM</div>
+                    </button>
+                    <button class="level-btn" data-level="4" onclick="selectLevel(4)">
+                        <div class="level-num">4</div>
+                        <div class="level-diff">HARD</div>
+                    </button>
+                    <button class="level-btn" data-level="5" onclick="selectLevel(5)">
+                        <div class="level-num">5</div>
+                        <div class="level-diff">BOSS</div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Fighter Cards -->
+            <div class="fighter-cards">
+                <div class="fighter-card selected" data-pet="0" onclick="selectFighter(0)">
+                    <div class="fighter-img-area fighter-bg-brown">
+                        <div class="fighter-stats">
+                            <div class="stat-row"><span>⚔️</span><span>45</span></div>
+                            <div class="stat-row"><span>🛡️</span><span>30</span></div>
+                            <div class="stat-row"><span>💨</span><span>60</span></div>
+                        </div>
+                        <img src="images/pet1.png" class="fighter-image" alt="Rissole Cat">
+                    </div>
+                    <div class="fighter-info">
+                        <div class="fighter-name">RISSOLE CAT</div>
+                        <div class="fighter-meta">
+                            <span class="fighter-level">LV.15</span>
+                            <span class="fighter-sep">|</span>
+                            <span class="fighter-status status-ready">READY</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fighter-card" data-pet="1" onclick="selectFighter(1)">
+                    <div class="fighter-img-area fighter-bg-dark">
+                        <div class="fighter-stats">
+                            <div class="stat-row"><span>⚔️</span><span>50</span></div>
+                            <div class="stat-row"><span>🛡️</span><span>40</span></div>
+                            <div class="stat-row"><span>💨</span><span>45</span></div>
+                        </div>
+                        <img src="images/pet2.png" class="fighter-image" alt="Grizzly Bear">
+                    </div>
+                    <div class="fighter-info">
+                        <div class="fighter-name">GRIZZLY BEAR</div>
+                        <div class="fighter-meta">
+                            <span class="fighter-level">LV.12</span>
+                            <span class="fighter-sep">|</span>
+                            <span class="fighter-status status-resting">RESTING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fighter-card" data-pet="2" onclick="selectFighter(2)">
+                    <div class="fighter-img-area fighter-bg-teal">
+                        <div class="fighter-stats">
+                            <div class="stat-row"><span>⚔️</span><span>35</span></div>
+                            <div class="stat-row"><span>🛡️</span><span>20</span></div>
+                            <div class="stat-row"><span>💨</span><span>70</span></div>
+                        </div>
+                        <img src="images/pet3.png" class="fighter-image" alt="Aqua Slime">
+                    </div>
+                    <div class="fighter-info">
+                        <div class="fighter-name">AQUA SLIME</div>
+                        <div class="fighter-meta">
+                            <span class="fighter-level">LV.5</span>
+                            <span class="fighter-sep">|</span>
+                            <span class="fighter-status status-training">IN TRAINING</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="start-battle-btn" onclick="startBattle()">
+                <span class="btn-icon">⚔️</span>
+                <span class="btn-text">START BATTLE!</span>
+            </button>
+
+            <button class="back-btn" onclick="navigateTo('home')">
+                <span class="btn-icon">←</span>
+                <span class="btn-text">BACK TO HOME</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Battle Page -->
+    <div id="battle-page" class="page">
+        <nav class="navbar">
+            <button class="nav-btn" onclick="navigateTo('home')">HOME</button>
+            <button class="nav-btn" onclick="navigateTo('mypets')">MY PETS</button>
+            <button class="nav-btn" onclick="navigateTo('marketplace')">MARKETPLACE</button>
+            <button class="nav-btn nav-login-btn" onclick="handleNavLoginClick()">LOGIN</button>
+        </nav>
+
+        <div class="battle-wrapper">
+            <div class="battle-arena-container">
+                <div class="battle-sky">
+                    <div class="vs-label" id="vs-label">VS</div>
+                    
+                    <!-- Player Pet and Enemy Pet moved below -->
+                </div>
+
+                <div class="battle-ground"></div>
+
+                <!-- Player Pet -->
+                <div class="battle-pet player-side" id="player-pet">
+                    <div class="pet-name-badge player-badge" id="player-name">RISSOLE CAT</div>
+                    <div class="hp-container">
+                        <span class="hp-label">HP</span>
+                        <div class="hp-bar-outer">
+                            <div class="hp-bar hp-high" id="player-hp-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="hp-text" id="player-hp-text">200/200</div>
+                    
+                    <!-- Energy Bar -->
+                    <div class="energy-container">
+                        <span class="energy-label">⚡</span>
+                        <div class="energy-bar-outer">
+                            <div class="energy-bar" id="player-energy-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="pet-image-container">
+                        <img src="images/pet1.png" class="pet-battle-image" id="player-sprite" alt="Player Pet">
+                        <div class="combo-display" id="player-combo" style="display: none;">COMBO ×2</div>
+                    </div>
+                </div>
+
+                <!-- Enemy Pet -->
+                <div class="battle-pet enemy-side" id="enemy-pet">
+                    <div class="pet-name-badge enemy-badge" id="enemy-name">BRAVE WOLF PUP</div>
+                    <div class="hp-container">
+                        <span class="hp-label">HP</span>
+                        <div class="hp-bar-outer">
+                            <div class="hp-bar hp-high" id="enemy-hp-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="hp-text" id="enemy-hp-text">176/176</div>
+                    
+                    <div class="pet-image-container">
+                        <img src="images/enemy.png" class="pet-battle-image" id="enemy-sprite" alt="Enemy Pet">
+                    </div>
+                </div>
+            </div>
+
+            <div class="battle-control-panel">
+                <div class="battle-log">
+                    <p id="battle-log-text">▸ BATTLE START! RISSOLE CAT vs BRAVE WOLF PUP!</p>
+                </div>
+
+                <div class="action-buttons" id="action-buttons">
+                    <button class="action-btn action-attack" onclick="performAction('attack')">
+                        <div class="action-content">
+                            <div class="action-icon">⚔️</div>
+                            <div class="action-label">ATTACK</div>
+                        </div>
+                    </button>
+
+                    <button class="action-btn action-special" onclick="performAction('special')" id="special-btn" disabled>
+                        <div class="action-content">
+                            <div class="action-icon">✨</div>
+                            <div class="action-label" id="special-label">SPECIAL (50⚡)</div>
+                        </div>
+                    </button>
+
+                    <button class="action-btn action-potion" onclick="performAction('potion')" id="potion-btn">
+                        <div class="action-content">
+                            <div class="action-icon">🧪</div>
+                            <div class="action-label" id="potion-label">POTION (3)</div>
+                        </div>
+                    </button>
+
+                    <button class="action-btn action-flee" onclick="performAction('flee')">
+                        <div class="action-content">
+                            <div class="action-icon">🏃</div>
+                            <div class="action-label">FLEE</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Placeholder Pages -->
+    <div id="mypets-page" class="page">
+        <nav class="navbar">
+            <button class="nav-btn" onclick="navigateTo('home')">HOME</button>
+            <button class="nav-btn active" onclick="navigateTo('mypets')">MY PETS</button>
+            <button class="nav-btn" onclick="navigateTo('marketplace')">MARKETPLACE</button>
+            <button class="nav-btn nav-login-btn" onclick="handleNavLoginClick()">LOGIN</button>
+        </nav>
+        
+        <div class="main-content">
+            <div class="arena-header">
+                <span class="paw-icon">🐾</span>
+                <h1 class="arena-page-title">MY PETS COLLECTION</h1>
+                <span class="paw-icon">🐾</span>
+            </div>
+            
+            <div class="my-pets-grid">
+                <!-- Pet Card 1 -->
+                <div class="my-pet-card">
+                    <div class="pet-card-header">
+                        <span class="pet-rarity rarity-epic">EPIC</span>
+                        <span class="pet-level-badge">LV. 15</span>
+                    </div>
+                    <div class="pet-showcase showcase-brown">
+                        <img src="images/pet1.png" alt="Rissole Cat" class="pet-showcase-img">
+                    </div>
+                    <div class="pet-card-body">
+                        <h3 class="pet-card-name">RISSOLE CAT</h3>
+                        <div class="pet-exp-container">
+                            <div class="exp-text"><span>EXP</span> <span>850 / 1000</span></div>
+                            <div class="exp-bar-bg"><div class="exp-bar-fill" style="width: 85%"></div></div>
+                        </div>
+                        <div class="pet-stats-grid">
+                            <div class="stat-box"><span class="stat-icon">❤️</span><span class="stat-val">200</span><span class="stat-lbl">HP</span></div>
+                            <div class="stat-box"><span class="stat-icon">⚔️</span><span class="stat-val">45</span><span class="stat-lbl">ATK</span></div>
+                            <div class="stat-box"><span class="stat-icon">🛡️</span><span class="stat-val">30</span><span class="stat-lbl">DEF</span></div>
+                            <div class="stat-box"><span class="stat-icon">💨</span><span class="stat-val">60</span><span class="stat-lbl">SPD</span></div>
+                        </div>
+                        <div class="pet-card-actions">
+                            <button class="action-btn-sm btn-main-pet active" onclick="setMainPet(0, this)">★ MAIN PET</button>
+                            <button class="action-btn-sm btn-upgrade-pet" onclick="upgradePet(0, 500)">UPGRADE <span>(500💰)</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pet Card 2 -->
+                <div class="my-pet-card">
+                    <div class="pet-card-header">
+                        <span class="pet-rarity rarity-rare">RARE</span>
+                        <span class="pet-level-badge">LV. 12</span>
+                    </div>
+                    <div class="pet-showcase showcase-dark">
+                        <img src="images/pet2.png" alt="Grizzly Bear" class="pet-showcase-img">
+                    </div>
+                    <div class="pet-card-body">
+                        <h3 class="pet-card-name">GRIZZLY BEAR</h3>
+                        <div class="pet-exp-container">
+                            <div class="exp-text"><span>EXP</span> <span>420 / 800</span></div>
+                            <div class="exp-bar-bg"><div class="exp-bar-fill" style="width: 52%"></div></div>
+                        </div>
+                        <div class="pet-stats-grid">
+                            <div class="stat-box"><span class="stat-icon">❤️</span><span class="stat-val">180</span><span class="stat-lbl">HP</span></div>
+                            <div class="stat-box"><span class="stat-icon">⚔️</span><span class="stat-val">50</span><span class="stat-lbl">ATK</span></div>
+                            <div class="stat-box"><span class="stat-icon">🛡️</span><span class="stat-val">40</span><span class="stat-lbl">DEF</span></div>
+                            <div class="stat-box"><span class="stat-icon">💨</span><span class="stat-val">45</span><span class="stat-lbl">SPD</span></div>
+                        </div>
+                        <div class="pet-card-actions">
+                            <button class="action-btn-sm btn-set-main" onclick="setMainPet(1, this)">SET AS MAIN</button>
+                            <button class="action-btn-sm btn-upgrade-pet" onclick="upgradePet(1, 400)">UPGRADE <span>(400💰)</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pet Card 3 -->
+                <div class="my-pet-card">
+                    <div class="pet-card-header">
+                        <span class="pet-rarity rarity-common">COMMON</span>
+                        <span class="pet-level-badge">LV. 5</span>
+                    </div>
+                    <div class="pet-showcase showcase-teal">
+                        <img src="images/pet3.png" alt="Aqua Slime" class="pet-showcase-img">
+                    </div>
+                    <div class="pet-card-body">
+                        <h3 class="pet-card-name">AQUA SLIME</h3>
+                        <div class="pet-exp-container">
+                            <div class="exp-text"><span>EXP</span> <span>50 / 300</span></div>
+                            <div class="exp-bar-bg"><div class="exp-bar-fill" style="width: 16%"></div></div>
+                        </div>
+                        <div class="pet-stats-grid">
+                            <div class="stat-box"><span class="stat-icon">❤️</span><span class="stat-val">120</span><span class="stat-lbl">HP</span></div>
+                            <div class="stat-box"><span class="stat-icon">⚔️</span><span class="stat-val">35</span><span class="stat-lbl">ATK</span></div>
+                            <div class="stat-box"><span class="stat-icon">🛡️</span><span class="stat-val">20</span><span class="stat-lbl">DEF</span></div>
+                            <div class="stat-box"><span class="stat-icon">💨</span><span class="stat-val">70</span><span class="stat-lbl">SPD</span></div>
+                        </div>
+                        <div class="pet-card-actions">
+                            <button class="action-btn-sm btn-set-main" onclick="setMainPet(2, this)">SET AS MAIN</button>
+                            <button class="action-btn-sm btn-upgrade-pet" onclick="upgradePet(2, 150)">UPGRADE <span>(150💰)</span></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pet Card 4 -->
+                <div class="my-pet-card">
+                    <div class="pet-card-header">
+                        <span class="pet-rarity rarity-legendary">LEGENDARY</span>
+                        <span class="pet-level-badge">LV. 25</span>
+                    </div>
+                    <div class="pet-showcase showcase-purple">
+                        <img src="images/burung.png" alt="Sky Griffin" class="pet-showcase-img">
+                    </div>
+                    <div class="pet-card-body">
+                        <h3 class="pet-card-name">SKY GRIFFIN</h3>
+                        <div class="pet-exp-container">
+                            <div class="exp-text"><span>EXP</span> <span>1900 / 2000</span></div>
+                            <div class="exp-bar-bg"><div class="exp-bar-fill" style="width: 95%"></div></div>
+                        </div>
+                        <div class="pet-stats-grid">
+                            <div class="stat-box"><span class="stat-icon">❤️</span><span class="stat-val">300</span><span class="stat-lbl">HP</span></div>
+                            <div class="stat-box"><span class="stat-icon">⚔️</span><span class="stat-val">80</span><span class="stat-lbl">ATK</span></div>
+                            <div class="stat-box"><span class="stat-icon">🛡️</span><span class="stat-val">65</span><span class="stat-lbl">DEF</span></div>
+                            <div class="stat-box"><span class="stat-icon">💨</span><span class="stat-val">95</span><span class="stat-lbl">SPD</span></div>
+                        </div>
+                        <div class="pet-card-actions">
+                            <button class="action-btn-sm btn-set-main" onclick="setMainPet(3, this)">SET AS MAIN</button>
+                            <button class="action-btn-sm btn-upgrade-pet" onclick="upgradePet(3, 1000)">UPGRADE <span>(1000💰)</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="back-btn" onclick="navigateTo('home')">
+                    <span class="btn-icon">←</span>
+                    <span class="btn-text">BACK TO HOME</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="marketplace-page" class="page">
+        <nav class="navbar">
+            <button class="nav-btn" onclick="navigateTo('home')">HOME</button>
+            <button class="nav-btn" onclick="navigateTo('mypets')">MY PETS</button>
+            <button class="nav-btn active" onclick="navigateTo('marketplace')">MARKETPLACE</button>
+            <button class="nav-btn nav-login-btn" onclick="handleNavLoginClick()">LOGIN</button>
+        </nav>
+        <div class="main-content">
+            <div class="arena-header">
+                <span class="shop-icon">🏪</span>
+                <h1 class="arena-page-title">MARKETPLACE</h1>
+                <span class="shop-icon">🏪</span>
+            </div>
+            
+            <div class="market-top-bar">
+                <div class="player-balance">
+                    <span class="coin-icon">💰</span>
+                    <span class="balance-amount" id="player-coins">2,500</span>
+                </div>
+                <div class="market-tabs">
+                    <button class="market-tab active" onclick="switchMarketTab('market-items', this)">ITEMS</button>
+                    <button class="market-tab" onclick="switchMarketTab('market-pets', this)">PETS</button>
+                    <button class="market-tab" onclick="switchMarketTab('market-special', this)">SPECIAL</button>
+                </div>
+            </div>
+
+            <div class="market-grid" id="market-items">
+                <!-- Item 1 -->
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-red">
+                            <span class="item-emoji">🧪</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">HP POTION</h3>
+                            <p class="market-item-desc">Heals 50 HP in battle.</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('HP Potion', 100)">
+                                BUY <span class="price-tag">100💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-blue">
+                            <span class="item-emoji">⚡</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">ENERGY DRINK</h3>
+                            <p class="market-item-desc">Restores 50 Energy instantly.</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('Energy Drink', 150)">
+                                BUY <span class="price-tag">150💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-gold">
+                            <span class="item-emoji">🥚</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">MYSTERY EGG</h3>
+                            <p class="market-item-desc">Hatches into a random Pet!</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('Mystery Egg', 1000)">
+                                BUY <span class="price-tag">1000💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-purple">
+                            <span class="item-emoji">💎</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">EVO STONE</h3>
+                            <p class="market-item-desc">Used to evolve max level pets.</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('Evo Stone', 2500)">
+                                BUY <span class="price-tag">2500💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pets Tab Container -->
+            <div class="market-grid" id="market-pets" style="display: none;">
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-red">
+                            <span class="item-emoji">🐉</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">FIRE DRAGON</h3>
+                            <p class="market-item-desc">High Attack. A fearsome ally.</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('Fire Dragon', 5000)">
+                                BUY <span class="price-tag">5000💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-blue">
+                            <span class="item-emoji">🦊</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">THUNDER FOX</h3>
+                            <p class="market-item-desc">Incredible Speed and Crits.</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('Thunder Fox', 4500)">
+                                BUY <span class="price-tag">4500💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Tab Container -->
+            <div class="market-grid" id="market-special" style="display: none;">
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-gold">
+                            <span class="item-emoji">👑</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">GOLDEN CROWN</h3>
+                            <p class="market-item-desc">Status symbol for your pet.</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('Golden Crown', 10000)">
+                                BUY <span class="price-tag">10000💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="market-card">
+                    <div class="market-card-inner">
+                        <div class="market-item-bg item-bg-purple">
+                            <span class="item-emoji">🏷️</span>
+                        </div>
+                        <div class="market-item-info">
+                            <h3 class="market-item-name">NAME TAG</h3>
+                            <p class="market-item-desc">Rename any of your pets.</p>
+                            <button class="action-btn-sm btn-buy" onclick="buyItem('Name Tag', 500)">
+                                BUY <span class="price-tag">500💰</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 10px;">
+                <button class="back-btn" onclick="navigateTo('home')">
+                    <span class="btn-icon">←</span>
+                    <span class="btn-text">BACK TO HOME</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div id="victory-modal" class="modal">
+        <div class="modal-content victory-card">
+            <div class="modal-header">
+                <h2 class="modal-title victory-title">⚔️ VICTORY! ⚔️</h2>
+            </div>
+            <div class="modal-body">
+                <p class="congrats-text">CONGRATULATIONS, TRAINER!</p>
+                <p class="victory-message" id="victory-message">You defeated the enemy!</p>
+                <div class="victory-stats" id="victory-stats">
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal">Level Completed:</span>
+                        <span class="stat-value-modal" id="completed-level">1</span>
+                    </div>
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal">Your Pet HP:</span>
+                        <span class="stat-value-modal" id="final-player-hp">150/200</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn next-level-btn" onclick="goToNextLevel()">
+                    <span>▶ NEXT LEVEL</span>
+                </button>
+                <button class="modal-btn back-arena-btn" onclick="closeVictoryModal()">
+                    <span>← BACK TO ARENA</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Defeat Modal -->
+    <div id="defeat-modal" class="modal">
+        <div class="modal-content defeat-card">
+            <div class="modal-header">
+                <h2 class="modal-title defeat-title">💀 DEFEAT 💀</h2>
+            </div>
+            <div class="modal-body">
+                <p class="defeat-text">DON'T GIVE UP, TRAINER!</p>
+                <p class="defeat-message" id="defeat-message">Your pet was defeated...</p>
+                <div class="defeat-stats" id="defeat-stats">
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal">Level Attempted:</span>
+                        <span class="stat-value-modal" id="attempted-level">1</span>
+                    </div>
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal">Enemy Remaining HP:</span>
+                        <span class="stat-value-modal" id="enemy-remaining-hp">50/176</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn retry-btn" onclick="retryBattle()">
+                    <span>🔄 TRY AGAIN</span>
+                </button>
+                <button class="modal-btn back-arena-btn" onclick="closeDefeatModal()">
+                    <span>← BACK TO ARENA</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Modal -->
+    <div id="market-modal" class="modal">
+        <div class="modal-content" id="market-modal-card">
+            <div class="modal-header" id="market-modal-header">
+                <h2 class="modal-title" id="market-modal-title">NOTIFICATION</h2>
+            </div>
+            <div class="modal-body">
+                <div id="market-modal-icon" style="font-size: 60px; margin-bottom: 10px; animation: battleIdle 2s infinite;">🛍️</div>
+                <p class="congrats-text" id="market-modal-subtitle">TRANSACTION SUCCESS!</p>
+                <p class="victory-message" id="market-modal-message">You bought an item.</p>
+                <div class="victory-stats" id="market-modal-stats-container">
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal" id="market-stat-label">Remaining Coins:</span>
+                        <span class="stat-value-modal" id="market-stat-value">2,500</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn back-arena-btn" style="width: 100%;" onclick="closeMarketModal()">
+                    <span>AWESOME!</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upgrade Modal -->
+    <div id="upgrade-modal" class="modal">
+        <div class="modal-content victory-card" id="upgrade-modal-card">
+            <div class="modal-header" id="upgrade-modal-header" style="border-color: #FFD700;">
+                <h2 class="modal-title victory-title" id="upgrade-modal-title">LEVEL UP!</h2>
+            </div>
+            <div class="modal-body">
+                <div id="upgrade-modal-icon" style="font-size: 60px; margin-bottom: 10px; animation: battleIdle 2s infinite;">🌟</div>
+                <p class="congrats-text" id="upgrade-modal-subtitle">PET IS NOW LV. X!</p>
+                <p class="victory-message" id="upgrade-modal-message" style="display: none;">Not enough coins.</p>
+                
+                <div class="victory-stats" id="upgrade-stats-container" style="margin-top: 15px;">
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal">⚔️ Attack:</span>
+                        <span class="stat-value-modal" id="upgrade-stat-atk" style="color: #4ade80;">0 (+5)</span>
+                    </div>
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal">🛡️ Defense:</span>
+                        <span class="stat-value-modal" id="upgrade-stat-def" style="color: #4ade80;">0 (+5)</span>
+                    </div>
+                    <div class="stat-item-modal">
+                        <span class="stat-label-modal">💨 Speed:</span>
+                        <span class="stat-value-modal" id="upgrade-stat-spd" style="color: #4ade80;">0 (+5)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn back-arena-btn" style="width: 100%;" onclick="closeUpgradeModal()">
+                    <span>NICE!</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- How To Play Modal -->
+    <div id="howto-modal" class="modal">
+        <div class="modal-content victory-card" style="width: 600px; border-color: #8B5CF6; box-shadow: 0 0 30px rgba(139,92,246,0.5);">
+            <div class="modal-header" style="border-color: #8B5CF6; background: linear-gradient(135deg, #1A0E05 0%, #2a0a5e 100%); padding: 15px;">
+                <h2 class="modal-title" style="color: #C4B5FD; text-shadow: 3px 0 0 #4a0a9e;">📋 HOW TO PLAY 📋</h2>
+            </div>
+            <div class="modal-body" style="text-align: left; padding: 20px; height: 350px; overflow-y: auto;">
+                
+                <div class="howto-section">
+                    <div class="howto-icon-box">🐾</div>
+                    <div class="howto-text">
+                        <h3 style="color: #FFD700; font-size: 14px; margin-bottom: 6px; text-shadow: 1px 1px 0 #000;">1. SELECT YOUR PET</h3>
+                        <p style="color: #E0D0FF; font-size: 9px; line-height: 1.6; font-family: 'Orbitron', sans-serif;">Go to <b style="color: #FFD700;">MY PETS</b> to choose from different pets with unique stats. Set your favorite as the <b style="color: #FFD700;">MAIN PET</b>.</p>
+                    </div>
+                </div>
+
+                <div class="howto-section">
+                    <div class="howto-icon-box">⚔️</div>
+                    <div class="howto-text">
+                        <h3 style="color: #FFD700; font-size: 14px; margin-bottom: 6px; text-shadow: 1px 1px 0 #000;">2. ENTER THE ARENA</h3>
+                        <p style="color: #E0D0FF; font-size: 9px; line-height: 1.6; font-family: 'Orbitron', sans-serif;">Click <b style="color: #FF6600;">BATTLE START!</b> on the home screen. Choose your difficulty level from EASY to BOSS!</p>
+                    </div>
+                </div>
+
+                <div class="howto-section">
+                    <div class="howto-icon-box">🎮</div>
+                    <div class="howto-text">
+                        <h3 style="color: #FFD700; font-size: 14px; margin-bottom: 6px; text-shadow: 1px 1px 0 #000;">3. BATTLE MECHANICS</h3>
+                        <ul style="color: #E0D0FF; font-size: 9px; line-height: 1.8; list-style-type: none; padding: 0; font-family: 'Orbitron', sans-serif;">
+                            <li><b style="color: #FF5050;">ATTACK:</b> Deal damage based on your ATK.</li>
+                            <li><b style="color: #50FF50;">POTION:</b> Heal 50 HP (Max 3 times per battle).</li>
+                            <li><b style="color: #B19CD9;">SPECIAL:</b> Unleash a powerful move (Requires 50⚡).</li>
+                            <li><b style="color: #AAAAAA;">FLEE:</b> Escape if the battle is too hard.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="howto-section">
+                    <div class="howto-icon-box">💰</div>
+                    <div class="howto-text">
+                        <h3 style="color: #FFD700; font-size: 14px; margin-bottom: 6px; text-shadow: 1px 1px 0 #000;">4. UPGRADE & SHOP</h3>
+                        <p style="color: #E0D0FF; font-size: 9px; line-height: 1.6; font-family: 'Orbitron', sans-serif;">Win battles to earn coins. Use coins to <b style="color: #FFD700;">UPGRADE</b> your pets' stats or buy new items in the <b style="color: #8B5CF6;">MARKETPLACE</b>!</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer" style="padding: 15px;">
+                <button class="modal-btn" style="width: 100%; background: linear-gradient(135deg, #7C3AED 0%, #4a0a9e 100%); border-color: #8B5CF6; color: white;" onclick="closeHowToPlay()" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter='brightness(1)'">
+                    <span>I'M READY!</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== PROFILE PAGE ==================== -->
+    <div id="profile-page" class="page">
+        <nav class="navbar">
+            <button class="nav-btn" onclick="navigateTo('home')">HOME</button>
+            <button class="nav-btn" onclick="navigateTo('mypets')">MY PETS</button>
+            <button class="nav-btn" onclick="navigateTo('marketplace')">MARKETPLACE</button>
+            <button class="nav-btn nav-login-btn" onclick="handleNavLoginClick()">LOGIN</button>
+        </nav>
+        <div class="main-content" style="align-items:center; justify-content:center; padding: 20px;">
+            <div class="profile-card">
+
+                <!-- Glowing avatar ring -->
+                <div class="profile-avatar-ring">
+                    <div class="profile-avatar" id="profile-avatar-icon">👤</div>
+                </div>
+
+                <!-- Username -->
+                <div class="profile-username" id="profile-username-display">TRAINER</div>
+                <div class="profile-badge">⭐ PETOPIA TRAINER ⭐</div>
+
+                <!-- Divider -->
+                <div class="profile-divider"></div>
+
+                <!-- Stats grid -->
+                <div class="profile-stats-grid">
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-icon">💰</div>
+                        <div class="profile-stat-value" id="profile-coins-display">2,500</div>
+                        <div class="profile-stat-label">COINS</div>
+                    </div>
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-icon">🐾</div>
+                        <div class="profile-stat-value" id="profile-pets-display">4</div>
+                        <div class="profile-stat-label">PETS</div>
+                    </div>
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-icon">⚔️</div>
+                        <div class="profile-stat-value" id="profile-battles-display">0</div>
+                        <div class="profile-stat-label">BATTLES</div>
+                    </div>
+                    <div class="profile-stat-box">
+                        <div class="profile-stat-icon">🏆</div>
+                        <div class="profile-stat-value" id="profile-wins-display">0</div>
+                        <div class="profile-stat-label">WINS</div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="profile-divider"></div>
+
+                <!-- Action buttons -->
+                <div class="profile-actions">
+                    <button class="profile-action-btn profile-play-btn" onclick="navigateTo('arena')">
+                        ⚔️ BATTLE NOW
+                    </button>
+                    <button class="profile-action-btn profile-logout-btn" onclick="handleLogout()">
+                        🚪 LOGOUT
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== GLOBAL NOTIFICATION MODAL ==================== -->
+    <div id="global-modal" class="modal" onclick="this.classList.remove('active')">
+        <div id="global-modal-card" class="modal-content victory-card" onclick="event.stopPropagation()">
+            <div id="global-modal-header" class="modal-header">
+                <div id="global-modal-icon" style="font-size:2.5rem; margin-bottom:8px;">✅</div>
+                <h2 id="global-modal-title" class="modal-title">SUCCESS</h2>
+            </div>
+            <div class="modal-body">
+                <p id="global-modal-message" style="text-align:center; color:#ccc; font-family:'Orbitron',sans-serif; font-size:12px; line-height:1.8;"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn" style="width:100%; background:linear-gradient(135deg,#7C3AED,#4a0a9e); border-color:#8B5CF6; color:white;"
+                    onclick="document.getElementById('global-modal').classList.remove('active')">
+                    <span>OK</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/pet.js"></script>
+    <script src="js/battle.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
