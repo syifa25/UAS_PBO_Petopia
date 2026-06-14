@@ -652,7 +652,7 @@
 }
 
 .table-view .column-header .label {
-    -fx-text-fill:   #F5E6C8;
+    -fx-text-fill:   #000000;
     -fx-font-size:   9px;
     -fx-font-weight: bold;
     -fx-alignment:   CENTER;

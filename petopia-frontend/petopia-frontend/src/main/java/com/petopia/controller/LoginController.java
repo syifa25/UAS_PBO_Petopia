@@ -1,35 +1,29 @@
 package com.petopia.controller;
 
-import com.petopia.db.DatabaseUtil;
+import com.petopia.api.ApiClient;
+import com.petopia.model.Session;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import com.petopia.model.Session;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.net.http.HttpResponse;
 
 public class LoginController {
 
-    @FXML private TextField usernameField;
+    @FXML private TextField     usernameField;
     @FXML private PasswordField passwordField;
-    @FXML private Button loginBtn;
-    @FXML private Label errorLabel;
+    @FXML private Button        loginBtn;
+    @FXML private Label         errorLabel;
 
     @FXML
     public void initialize() {
         loginBtn.setOnAction(e -> handleLogin());
-
-        // Allow Enter key to login
-        usernameField.setOnKeyPressed(e -> {
-            if (e.getCode().toString().equals("ENTER")) handleLogin();
-        });
-        passwordField.setOnKeyPressed(e -> {
-            if (e.getCode().toString().equals("ENTER")) handleLogin();
-        });
+        usernameField.setOnKeyPressed(e -> { if (e.getCode().toString().equals("ENTER")) handleLogin(); });
+        passwordField.setOnKeyPressed(e -> { if (e.getCode().toString().equals("ENTER")) handleLogin(); });
     }
 
     private void handleLogin() {
@@ -37,42 +31,48 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showError("Username and password cannot be empty!");
+            showError("Username and password cannot be empty.");
             return;
         }
 
-        if (authenticateUser(username, password)) {
-            navigateToHome();
-        } else {
-            showError("Invalid username or password!");
-            passwordField.clear();
-        }
-    }
+        loginBtn.setDisable(true);
+        errorLabel.setText("Logging in...");
 
-    private boolean authenticateUser(String username, String password) {
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement ps = conn.prepareStatement(
-                     "SELECT id, password_hash, display_name FROM users WHERE username = ?")) {
+        // Call API on background thread — never block JavaFX thread
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                String json = "{\"username\":\"" + escape(username) +
+                              "\",\"password\":\"" + escape(password) + "\"}";
+                HttpResponse<String> resp = ApiClient.post("/auth/login", json);
 
-            ps.setString(1, username);
+                Platform.runLater(() -> {
+                    if (resp.statusCode() == 200) {
+                        // Parse response
+                        String body = resp.body();
+                        Long   userId      = ApiClient.extractLong(body,   "userId");
+                        String uname       = ApiClient.extractString(body, "username");
+                        String displayName = ApiClient.extractString(body, "displayName");
+                        String token       = ApiClient.extractString(body, "token");
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    String storedHash = rs.getString("password_hash");
-                    String displayName = rs.getString("display_name");
-
-                    if (DatabaseUtil.verifyPassword(password, storedHash)) {
-                        Long userId = rs.getLong("id");
-                        Session.login(userId, username, displayName);
-                        return true;
+                        Session.login(userId, uname, displayName, token);
+                        navigateToHome();
+                    } else {
+                        String errMsg = ApiClient.extractString(resp.body(), "error");
+                        showError(errMsg != null ? errMsg : "Login failed.");
+                        loginBtn.setDisable(false);
                     }
-                }
+                });
+                return null;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        };
 
-        return false;
+        task.setOnFailed(e -> Platform.runLater(() -> {
+            showError("Cannot connect to server. Is the backend running?");
+            loginBtn.setDisable(false);
+        }));
+
+        new Thread(task, "login-thread").start();
     }
 
     private void showError(String message) {
@@ -115,4 +115,9 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }}
+    }
+
+    private String escape(String s) {
+        return s.replace("\\", "\\\\").replace("\"", "\\\"");
+    }
+}

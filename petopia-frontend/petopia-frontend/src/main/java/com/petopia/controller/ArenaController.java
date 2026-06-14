@@ -1,12 +1,13 @@
 package com.petopia.controller;
 
+import com.petopia.api.ApiClient;
 import com.petopia.battle.BattleEvent;
 import com.petopia.battle.BattleService;
-import com.petopia.db.DatabaseUtil;
 import com.petopia.model.Pet;
 import com.petopia.model.Session;
 import javafx.animation.*;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,9 +20,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 public class ArenaController {
 
@@ -401,17 +399,38 @@ public class ArenaController {
     }
 
     private void saveBattleResultToDb(String result) {
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement ps = conn.prepareStatement(
-                     "INSERT INTO battles (player_id, opponent_name, winner, duration_ms) VALUES (?, ?, ?, ?)")) {
-            if (Session.isLoggedIn()) ps.setLong(1, Session.getUserId());
-            else ps.setObject(1, null);
-            ps.setString(2, enemyPet.getName());
-            ps.setString(3, result);
-            ps.setLong(4, 0L);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Warning: Failed to save battle result: " + e.getMessage());
+        // Determine outcome cleanly
+        String outcome;
+        if (result.toLowerCase().contains("fled")) {
+            outcome = "FLED";
+        } else if (result.toLowerCase().startsWith(playerPet.getName().toLowerCase())) {
+            outcome = "WIN";
+        } else {
+            outcome = "LOSS";
         }
+
+        // Fire-and-forget on background thread — don't block the UI
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                String json = "{" +
+                        (Session.isLoggedIn() ? "\"playerId\":" + Session.getUserId() + "," : "") +
+                        "\"opponentName\":\"" + enemyPet.getName() + "\"," +
+                        "\"winner\":\"" + outcome + "\"," +
+                        "\"durationMs\":0}";
+
+                String token = Session.getToken();
+                if (token != null) {
+                    ApiClient.post("/battles/result", json, token);
+                } else {
+                    ApiClient.post("/battles/result", json);
+                }
+                return null;
+            }
+        };
+        task.setOnFailed(e ->
+            System.out.println("Warning: Failed to save battle result via API: " +
+                               task.getException().getMessage()));
+        new Thread(task, "battle-save-thread").start();
     }
 }
