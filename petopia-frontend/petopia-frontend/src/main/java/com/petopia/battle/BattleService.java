@@ -1,20 +1,13 @@
 package com.petopia.battle;
 
-import com.petopia.model.Pet;
-
+import com.petopia.model.Combatant;
 import java.util.Random;
 import java.util.function.Consumer;
 
-/**
- * BattleService: menjalankan mekanik battle sederhana berbasis giliran.
- * - Player menggunakan tindakan (attack, potion, flee)
- * - Setelah player turn, musuh (AI sederhana) melakukan serangan balik jika masih hidup
- * - Mengirimkan BattleEvent ke UI melalui Consumer<BattleEvent>
- */
 public class BattleService {
 
-    private final Pet player;
-    private final Pet enemy;
+    private final Combatant player;
+    private final Combatant enemy;
     private final Consumer<BattleEvent> eventConsumer;
     private final Random rnd = new Random();
 
@@ -22,7 +15,7 @@ public class BattleService {
     private boolean playerFled = false;
     private int potionCount = 1; // default; bisa di-pass/diubah
 
-    public BattleService(Pet player, Pet enemy, Consumer<BattleEvent> eventConsumer) {
+    public BattleService(Combatant player, Combatant enemy, Consumer<BattleEvent> eventConsumer) {
         this.player = player;
         this.enemy = enemy;
         this.eventConsumer = eventConsumer;
@@ -36,7 +29,8 @@ public class BattleService {
     // Player actions:
     public void playerAttack() {
         if (battleOver) return;
-        int dmg = calcDamage(player.getAttack(), enemy.getDefense());
+        // gunakan computeAttackValue() (polymorphic) agar player/ability bisa override behavior
+        int dmg = calcDamage(player.computeAttackValue(), enemy.getDefense());
         int dealt = enemy.takeDamage(dmg);
         event(player.getName() + " attacks for " + dealt + " damage!");
         sendEvent(BattleEvent.hpUpdate(1, enemy.getHp(), enemy.getMaxHp()));
@@ -77,7 +71,7 @@ public class BattleService {
     private int calcDamage(int atk, int def) {
         // simple formula: base = atk - def/2; plus randomness
         int base = Math.max(1, atk - def/2);
-        int variance = rnd.nextInt(Math.max(1, base)) ; // 0..base-1
+        int variance = rnd.nextInt(Math.max(1, base)); // 0..base-1
         return base + variance;
     }
 
@@ -85,7 +79,9 @@ public class BattleService {
         if (enemy.isFainted() || battleOver) return;
         // Signal UI to play enemy lunge animation
         sendEvent(BattleEvent.enemyAttack());
-        int dmg = calcDamage(enemy.getAttack(), player.getDefense());
+        // gunakan computeAttackValue() secara polymorphic
+        int enemyAtk = enemy.computeAttackValue();
+        int dmg = calcDamage(enemyAtk, player.getDefense());
         int dealt = player.takeDamage(dmg);
         event(enemy.getName() + " attacks for " + dealt + " damage!");
         sendEvent(BattleEvent.hpUpdate(0, player.getHp(), player.getMaxHp()));

@@ -4,6 +4,8 @@ import com.petopia.battle.BattleEvent;
 import com.petopia.battle.BattleService;
 import com.petopia.db.DatabaseUtil;
 import com.petopia.model.Pet;
+import com.petopia.model.PlayerPet;
+import com.petopia.model.EnemyPet;
 import com.petopia.model.Session;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -62,8 +64,8 @@ public class ArenaController {
 
     // ── State ───────────────────────────────────────────────
     private BattleService battleService;
-    private Pet playerPet;
-    private Pet enemyPet;
+    private PlayerPet playerPet;
+    private EnemyPet enemyPet;
     private int savedPlayerPetIndex = 0;
 
     // ── Message queue — shows each log line for 1.5s before the next ──
@@ -112,12 +114,12 @@ public class ArenaController {
 
         // Build pets
         Object[] pd = PET_DATA[Math.min(playerPetIndex, PET_DATA.length - 1)];
-        playerPet = new Pet((String)pd[0], (String)pd[1], (Integer)pd[2],
-                            (Integer)pd[3], (Integer)pd[4], (Integer)pd[5]);
+        playerPet = new PlayerPet((String)pd[0], (String)pd[1], (Integer)pd[2],
+                (Integer)pd[3], (Integer)pd[4], (Integer)pd[5]);
 
         Object[] ed = ENEMY_DATA[0];
-        enemyPet  = new Pet((String)ed[0], (String)ed[1], (Integer)ed[2],
-                            (Integer)ed[3], (Integer)ed[4], (Integer)ed[5]);
+        enemyPet  = new EnemyPet((String)ed[0], (String)ed[1], (Integer)ed[2],
+                (Integer)ed[3], (Integer)ed[4], (Integer)ed[5], 0.20); // 20% crit
 
         // Populate UI
         loadImage(playerImage, playerPet.getImagePath());
