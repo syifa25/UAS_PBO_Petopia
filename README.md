@@ -32,3 +32,13 @@ Dengan kombinasi fitur pet care dan battle system, Petopia menawarkan pengalaman
 - Spring Boot
 - JDBC
 - H2 Database
+
+## Langkah Instalasi/Run
+0. (Disarankan membuka folder "petopia-frontend" dan "petopia-backend" pada 2 tab yang berbeda)
+1. Buka folder "petopia-backend" lalu View -> Tool Windows -> Maven -> Petopia Backend -> Plugins -> spring-boot -> spring-boot:run
+2. Tunggu backend berhasil dijalankan
+3. Buka folder "petopia-frontend" lalu View -> Tool Windows -> Maven -> petopia-frontend -> Plugins -> javafx -> javafx:run
+4. Nikmati
+
+## Link Video Presentasi
+https://youtu.be/BUMcLrkbXy8
