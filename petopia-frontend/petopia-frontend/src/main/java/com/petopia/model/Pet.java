@@ -37,9 +37,9 @@ public class Pet {
 
     public int takeDamage(int damage) {
         if (isFainted()) return 0;
-        hp -= damage;
-        if (hp < 0) hp = 0;
-        return Math.max(damage, 0);
+        int actualDamage = Math.min(damage, hp); // can't deal more than remaining HP
+        hp -= actualDamage;
+        return actualDamage;
     }
 
     @Override

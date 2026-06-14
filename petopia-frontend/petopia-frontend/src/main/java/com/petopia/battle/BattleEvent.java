@@ -1,7 +1,7 @@
 package com.petopia.battle;
 
 public class BattleEvent {
-    public enum Type { LOG, HP_UPDATE, BATTLE_END }
+    public enum Type { LOG, HP_UPDATE, BATTLE_END, ENEMY_ATTACK }
 
     private final Type type;
     private final String message;    // untuk LOG atau BATTLE_END
@@ -27,6 +27,10 @@ public class BattleEvent {
 
     public static BattleEvent end(String message) {
         return new BattleEvent(Type.BATTLE_END, message, -1, -1, -1);
+    }
+
+    public static BattleEvent enemyAttack() {
+        return new BattleEvent(Type.ENEMY_ATTACK, null, -1, -1, -1);
     }
 
     public Type getType() { return type; }

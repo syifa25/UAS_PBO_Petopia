@@ -83,7 +83,8 @@ public class BattleService {
 
     private void enemyTurnIfAlive() {
         if (enemy.isFainted() || battleOver) return;
-        // small pause can be added by UI thread; here we just execute
+        // Signal UI to play enemy lunge animation
+        sendEvent(BattleEvent.enemyAttack());
         int dmg = calcDamage(enemy.getAttack(), player.getDefense());
         int dealt = player.takeDamage(dmg);
         event(enemy.getName() + " attacks for " + dealt + " damage!");

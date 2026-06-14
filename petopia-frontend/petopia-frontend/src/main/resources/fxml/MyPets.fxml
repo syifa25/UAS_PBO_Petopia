@@ -48,21 +48,15 @@
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
                         <Button styleClass="act-btn" onAction="#feedPet1"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="🍖" styleClass="act-icon"/>
-                                <Label text="FEED" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#playPet1"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="▶" styleClass="act-icon"/>
-                                <Label text="PLAY" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#trainPet1" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="💪" styleClass="act-icon"/>
-                                <Label text="TRAIN" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                     </HBox>
@@ -87,21 +81,15 @@
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
                         <Button styleClass="act-btn" onAction="#feedPet2"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="🍖" styleClass="act-icon"/>
-                                <Label text="FEED" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#playPet2"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="▶" styleClass="act-icon"/>
-                                <Label text="PLAY" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#trainPet2" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="💪" styleClass="act-icon"/>
-                                <Label text="TRAIN" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                     </HBox>
@@ -126,21 +114,15 @@
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
                         <Button styleClass="act-btn" onAction="#feedPet3"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="🍖" styleClass="act-icon"/>
-                                <Label text="FEED" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#playPet3"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="▶" styleClass="act-icon"/>
-                                <Label text="PLAY" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#trainPet3" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="💪" styleClass="act-icon"/>
-                                <Label text="TRAIN" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                     </HBox>
@@ -165,21 +147,15 @@
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
                         <Button styleClass="act-btn" onAction="#feedPet4"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="🍖" styleClass="act-icon"/>
-                                <Label text="FEED" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#playPet4"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="▶" styleClass="act-icon"/>
-                                <Label text="PLAY" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#trainPet4" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="💪" styleClass="act-icon"/>
-                                <Label text="TRAIN" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                     </HBox>
@@ -204,21 +180,15 @@
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
                         <Button styleClass="act-btn" onAction="#feedPet5"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="🍖" styleClass="act-icon"/>
-                                <Label text="FEED" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#playPet5"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="▶" styleClass="act-icon"/>
-                                <Label text="PLAY" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                         <Button styleClass="act-btn" onAction="#trainPet5" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">
-                                <Label text="💪" styleClass="act-icon"/>
-                                <Label text="TRAIN" styleClass="act-label"/>
+                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
                             </VBox></graphic>
                         </Button>
                     </HBox>

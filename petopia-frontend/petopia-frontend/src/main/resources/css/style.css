@@ -834,3 +834,80 @@
 }
 
 .register-link:hover { -fx-text-fill: #3A6CC8; }
+
+/* ============================================================
+   BATTLE — LEVEL LABEL
+   ============================================================ */
+.battle-pet-level {
+    -fx-text-fill:        #F0C040;
+    -fx-font-size:        9px;
+    -fx-font-weight:      bold;
+    -fx-alignment:        CENTER;
+    -fx-text-alignment:   CENTER;
+}
+
+/* ============================================================
+   BATTLE — SINGLE-LINE LOG LABEL (replaces TextArea)
+   ============================================================ */
+.battle-log {
+    -fx-background-color: #F5F0E8;
+    -fx-text-fill:        #0D1B2A;
+    -fx-font-size:        13px;
+    -fx-font-weight:      bold;
+    -fx-border-color:     #0D1B2A;
+    -fx-border-width:     4;
+    -fx-border-radius:    0;
+    -fx-background-radius:0;
+    -fx-padding:          10 16 10 16;
+    -fx-effect: dropshadow(one-pass-box, #0D1B2A, 0, 0, 4, 4);
+}
+
+/* ============================================================
+   RESULT OVERLAY PANEL
+   ============================================================ */
+.result-panel {
+    -fx-background-color: #F5F0E8;
+    -fx-border-color:     #0D1B2A;
+    -fx-border-width:     4;
+    -fx-border-radius:    0;
+    -fx-background-radius:0;
+    -fx-padding:          36 32 32 32;
+    -fx-effect: dropshadow(one-pass-box, #0D1B2A, 0, 0, 6, 6);
+}
+
+.result-icon {
+    -fx-font-size:  52px;
+    -fx-alignment:  CENTER;
+}
+
+.result-title {
+    -fx-text-fill:   #0D1B2A;
+    -fx-font-size:   32px;
+    -fx-font-weight: bold;
+    -fx-alignment:   CENTER;
+    -fx-border-color: transparent transparent #F0C040 transparent;
+    -fx-border-width: 0 0 3 0;
+    -fx-padding:      0 0 8 0;
+}
+
+.result-title-defeat {
+    -fx-text-fill: #8B0000;
+}
+
+.result-msg {
+    -fx-text-fill:   #4A5568;
+    -fx-font-size:   12px;
+    -fx-font-weight: bold;
+    -fx-alignment:   CENTER;
+    -fx-text-alignment: CENTER;
+}
+
+/* ============================================================
+   HP BAR COLOR STATES
+   ============================================================ */
+.battle-hp-bar.hp-bar-yellow {
+    -fx-accent: #ECC94B;
+}
+.battle-hp-bar.hp-bar-red {
+    -fx-accent: #E53E3E;
+}

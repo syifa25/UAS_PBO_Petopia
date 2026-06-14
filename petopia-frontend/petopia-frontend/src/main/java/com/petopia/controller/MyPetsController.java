@@ -55,25 +55,25 @@ public class MyPetsController {
         navigateTo("/fxml/Arena.fxml", goToArenaBtn);
     }
 
-    @FXML private void feedPet1()  { showInfo("Fed!",   "Dog enjoyed the meal! 🍖"); }
-    @FXML private void playPet1()  { showInfo("Play!",  "Dog is having fun! ▶"); }
-    @FXML private void trainPet1() { showInfo("Train!", "Dog is getting stronger! 💪"); }
+    @FXML private void feedPet1()  { showInfo("Fed!",   "Dog enjoyed the meal!"); }
+    @FXML private void playPet1()  { showInfo("Play!",  "Dog is having fun!"); }
+    @FXML private void trainPet1() { showInfo("Train!", "Dog is getting stronger!"); }
 
-    @FXML private void feedPet2()  { showInfo("Fed!",   "Risol Cat enjoyed the meal! 🍖"); }
-    @FXML private void playPet2()  { showInfo("Play!",  "Risol Cat is having fun! ▶"); }
-    @FXML private void trainPet2() { showInfo("Train!", "Risol Cat is getting stronger! 💪"); }
+    @FXML private void feedPet2()  { showInfo("Fed!",   "Risol Cat enjoyed the meal!"); }
+    @FXML private void playPet2()  { showInfo("Play!",  "Risol Cat is having fun!"); }
+    @FXML private void trainPet2() { showInfo("Train!", "Risol Cat is getting stronger!"); }
 
-    @FXML private void feedPet3()  { showInfo("Fed!",   "Cat enjoyed the meal! 🍖"); }
-    @FXML private void playPet3()  { showInfo("Play!",  "Cat is having fun! ▶"); }
-    @FXML private void trainPet3() { showInfo("Train!", "Cat is getting stronger! 💪"); }
+    @FXML private void feedPet3()  { showInfo("Fed!",   "Cat enjoyed the meal!"); }
+    @FXML private void playPet3()  { showInfo("Play!",  "Cat is having fun!"); }
+    @FXML private void trainPet3() { showInfo("Train!", "Cat is getting stronger!"); }
 
-    @FXML private void feedPet4()  { showInfo("Fed!",   "Aqua Slime enjoyed the meal! 🍖"); }
-    @FXML private void playPet4()  { showInfo("Play!",  "Aqua Slime is having fun! ▶"); }
-    @FXML private void trainPet4() { showInfo("Train!", "Aqua Slime is getting stronger! 💪"); }
+    @FXML private void feedPet4()  { showInfo("Fed!",   "Aqua Slime enjoyed the meal!"); }
+    @FXML private void playPet4()  { showInfo("Play!",  "Aqua Slime is having fun!"); }
+    @FXML private void trainPet4() { showInfo("Train!", "Aqua Slime is getting stronger!"); }
 
-    @FXML private void feedPet5()  { showInfo("Fed!",   "Swift Bird enjoyed the meal! 🍖"); }
-    @FXML private void playPet5()  { showInfo("Play!",  "Swift Bird is having fun! ▶"); }
-    @FXML private void trainPet5() { showInfo("Train!", "Swift Bird is getting stronger! 💪"); }
+    @FXML private void feedPet5()  { showInfo("Fed!",   "Swift Bird enjoyed the meal!"); }
+    @FXML private void playPet5()  { showInfo("Play!",  "Swift Bird is having fun!"); }
+    @FXML private void trainPet5() { showInfo("Train!", "Swift Bird is getting stronger!"); }
 
     private void loadImage(ImageView iv, String path) {
         try {
