@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import com.petopia.model.Session;
 
 public class HomeController {
 
@@ -41,11 +42,23 @@ public class HomeController {
     @FXML
     public void initialize() {
 
+        if (Session.isLoggedIn()) {
+            navLogin.setText(Session.getDisplayName() != null && !Session.getDisplayName().isBlank()
+                    ? Session.getDisplayName().toUpperCase()
+                    : Session.getUsername().toUpperCase());
+
+            navLogin.setOnAction(e -> {
+                Session.logout();
+                navigateTo("/fxml/Login.fxml", navLogin);
+            });
+        } else {
+            navLogin.setText("LOGIN");
+            navLogin.setOnAction(e -> navigateTo("/fxml/Login.fxml", navLogin));
+        }
         // ===== NAVBAR =====
         navHome.setOnAction(e -> navigateTo("/fxml/Home.fxml", navHome));
         navMyPets.setOnAction(e -> navigateTo("/fxml/MyPets.fxml", navMyPets));
-        navMarketplace.setOnAction(e -> navigateTo("/fxml/Marketplace.fxml", navMarketplace));
-        navLogin.setOnAction(e -> navigateTo("/fxml/Login.fxml", navLogin));
+        navMarketplace.setOnAction(e -> navigateTo("/fxml/Leaderboard.fxml", navMarketplace));
 
         // ===== PET SELECTOR =====
         petButtons = new Button[]{pet1Btn, pet2Btn, pet3Btn, pet4Btn};

@@ -13,10 +13,11 @@
       alignment="TOP_CENTER" spacing="0">
 
     <!-- NAVBAR -->
-    <HBox styleClass="navbar" alignment="CENTER" spacing="80" prefHeight="52">
+    <<HBox styleClass="navbar" alignment="CENTER" spacing="80" prefHeight="52">
         <Button fx:id="navHome" text="HOME" styleClass="nav-btn"/>
         <Button fx:id="navMyPets" text="MY PETS" styleClass="nav-btn"/>
-        <Button fx:id="navMarketplace" text="MARKETPLACE" styleClass="nav-btn"/>
+        <Button fx:id="navMarketplace" text="LEADERBOARD" styleClass="nav-btn"/>
+        <Button fx:id="navLogin" text="LOGIN" styleClass="nav-btn"/>
     </HBox>
 
     <!-- BATTLE CONTAINER -->

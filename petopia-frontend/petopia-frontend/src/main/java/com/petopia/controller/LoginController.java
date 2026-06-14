@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import com.petopia.model.Session;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,19 +52,26 @@ public class LoginController {
     private boolean authenticateUser(String username, String password) {
         try (Connection conn = DatabaseUtil.getConnection();
              PreparedStatement ps = conn.prepareStatement(
-                     "SELECT password_hash FROM users WHERE username = ?")) {
+                     "SELECT id, password_hash, display_name FROM users WHERE username = ?")) {
 
             ps.setString(1, username);
+
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     String storedHash = rs.getString("password_hash");
-                    // Validate password (simple check; use BCrypt untuk production)
-                    return DatabaseUtil.verifyPassword(password, storedHash);
+                    String displayName = rs.getString("display_name");
+
+                    if (DatabaseUtil.verifyPassword(password, storedHash)) {
+                        Long userId = rs.getLong("id");
+                        Session.login(userId, username, displayName);
+                        return true;
+                    }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return false;
     }
 

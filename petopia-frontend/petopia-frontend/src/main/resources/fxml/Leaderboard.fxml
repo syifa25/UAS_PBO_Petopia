@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.petopia.controller.LeaderboardController"
+      styleClass="root-bg"
+      prefWidth="1000" prefHeight="700">
+
+    <HBox styleClass="navbar" alignment="CENTER" spacing="80" prefHeight="52">
+        <Button fx:id="navHome" text="HOME" styleClass="nav-btn"/>
+        <Button fx:id="navMyPets" text="MY PETS" styleClass="nav-btn"/>
+        <Button fx:id="navLeaderboard" text="LEADERBOARD" styleClass="nav-btn nav-active"/>
+        <Button fx:id="navLogin" text="LOGIN" styleClass="nav-btn"/>
+    </HBox>
+
+    <VBox alignment="CENTER" spacing="25" VBox.vgrow="ALWAYS" styleClass="main-content">
+
+        <Label text="LEADERBOARD" style="-fx-font-size: 42px; -fx-font-weight: bold;"/>
+
+        <TableView fx:id="leaderboardTable" prefWidth="760" prefHeight="420">
+            <columns>
+                <TableColumn fx:id="rankColumn" text="RANK" prefWidth="80"/>
+                <TableColumn fx:id="usernameColumn" text="USERNAME" prefWidth="220"/>
+                <TableColumn fx:id="winColumn" text="WIN" prefWidth="100"/>
+                <TableColumn fx:id="loseColumn" text="LOSE" prefWidth="100"/>
+                <TableColumn fx:id="scoreColumn" text="SCORE" prefWidth="120"/>
+                <TableColumn fx:id="lastEnemyColumn" text="LAST ENEMY" prefWidth="140"/>
+            </columns>
+        </TableView>
+
+        <Button fx:id="backHomeBtn" text="← BACK TO HOME" prefWidth="260" prefHeight="55"
+                styleClass="battle-btn"/>
+    </VBox>
+</VBox>

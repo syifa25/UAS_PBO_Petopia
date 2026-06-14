@@ -1,5 +1,5 @@
 package com.petopia.controller;
-
+import com.petopia.model.Session;
 import com.petopia.battle.BattleEvent;
 import com.petopia.battle.BattleService;
 import com.petopia.db.DatabaseUtil;
@@ -23,6 +23,7 @@ public class ArenaController {
     @FXML private Button navHome;
     @FXML private Button navMyPets;
     @FXML private Button navMarketplace;
+    @FXML private Button navLogin;
     @FXML private Button backHomeBtn;
 
     @FXML private ImageView playerImage;
@@ -63,7 +64,21 @@ public class ArenaController {
     public void initialize() {
         navHome.setOnAction(e -> navigateTo("/fxml/Home.fxml", navHome));
         navMyPets.setOnAction(e -> navigateTo("/fxml/MyPets.fxml", navMyPets));
-        navMarketplace.setOnAction(e -> navigateTo("/fxml/Marketplace.fxml", navMarketplace));
+        navMarketplace.setOnAction(e -> navigateTo("/fxml/Leaderboard.fxml", navMarketplace));
+
+        if (Session.isLoggedIn()) {
+            navLogin.setText(Session.getDisplayName() != null && !Session.getDisplayName().isBlank()
+                    ? Session.getDisplayName().toUpperCase()
+                    : Session.getUsername().toUpperCase());
+
+            navLogin.setOnAction(e -> {
+                Session.logout();
+                navigateTo("/fxml/Login.fxml", navLogin);
+            });
+        } else {
+            navLogin.setText("LOGIN");
+            navLogin.setOnAction(e -> navigateTo("/fxml/Login.fxml", navLogin));
+        }
     }
 
     public void initBattle(int playerPetIndex) {
@@ -203,13 +218,20 @@ public class ArenaController {
     private void saveBattleResultToDb(String result) {
         try (Connection conn = DatabaseUtil.getConnection()) {
             String sql = "INSERT INTO battles (player_id, opponent_name, winner, duration_ms) VALUES (?, ?, ?, ?)";
+
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setObject(1, null);
+                if (Session.isLoggedIn()) {
+                    ps.setLong(1, Session.getUserId());
+                } else {
+                    ps.setObject(1, null);
+                }
+
                 ps.setString(2, enemyPet.getName());
                 ps.setString(3, result);
                 ps.setLong(4, 0L);
                 ps.executeUpdate();
             }
+
         } catch (Exception e) {
             System.out.println("Warning: Failed to save battle result: " + e.getMessage());
         }
