@@ -19,11 +19,11 @@ Dengan kombinasi fitur pet care dan battle system, Petopia menawarkan pengalaman
 - Antarmuka grafis berbasis JavaFX
 
 ## Game Developer
-- Ferdinand (241401080)
-- Reviata Kezia Pandiangan (241401110)
-- Grace Claudia Silitonga (241401128)
-- Umri Marsyifa (241401029)
-- Bella Richa Gracia Sijabat (241401137)
+- Ferdinand (241401080) - Back-End
+- Reviata Kezia Pandiangan (241401110) - Back-End
+- Grace Claudia Silitonga (241401128) - Front-End
+- Umri Marsyifa (241401029) - Front-End
+- Bella Richa Gracia Sijabat (241401137) - Design UI/UX
 
 ## Teknologi
 - Java
