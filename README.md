@@ -4,9 +4,8 @@ Petopia adalah game virtual pet berbasis Java yang dikembangkan dengan menerapka
 Proyek ini menerapkan konsep-konsep OOP seperti inheritance, encapsulation, polymorphism, dan abstraction.
 
 Pada game ini pemain dapat mengoleksi dan merawat berbagai pet unik melalui aktivitas seperti memberi makan, bermain, 
-dan melatih pet untuk meningkatkan pengalaman bermain.
+dan melatih pet untuk meningkatkan pengalaman bermain. Petopia juga menghadirkan sistem battle arena di mana pemain dapat membawa pet mereka ke dalam pertarungan melawan musuh yang dipilih secara acak.
 
-Petopia juga menghadirkan sistem battle arena di mana pemain dapat membawa pet mereka ke dalam pertarungan melawan musuh yang dipilih secara acak. Setiap pet memiliki atribut seperti HP, Attack, Defense, dan Level yang memengaruhi jalannya pertempuran. 
 Dengan kombinasi fitur pet care dan battle system, Petopia menawarkan pengalaman bermain yang sederhana namun interaktif.
 
 ## Fitur Utama
@@ -30,5 +29,6 @@ Dengan kombinasi fitur pet care dan battle system, Petopia menawarkan pengalaman
 - Java
 - JavaFX
 - Maven
+- Spring Boot
 - JDBC
 - H2 Database
