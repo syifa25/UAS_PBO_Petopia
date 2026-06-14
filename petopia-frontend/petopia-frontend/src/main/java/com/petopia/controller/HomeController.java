@@ -25,15 +25,17 @@ public class HomeController {
     @FXML private Button pet2Btn;
     @FXML private Button pet3Btn;
     @FXML private Button pet4Btn;
+    @FXML private Button pet5Btn;
 
     @FXML private ImageView playerPetImage;
     @FXML private ImageView enemyPetImage;
 
     private final String[] petImages = {
             "/images/pet1.png",
+            "/images/risol_mayo_cat.png",
             "/images/pet2.png",
-            "/images/pet3.png",
-            "/images/pet4.png"
+            "/images/slime_ijo.png",
+            "/images/burung.png"
     };
 
     private Button[] petButtons;
@@ -61,7 +63,7 @@ public class HomeController {
         navMarketplace.setOnAction(e -> navigateTo("/fxml/Leaderboard.fxml", navMarketplace));
 
         // ===== PET SELECTOR =====
-        petButtons = new Button[]{pet1Btn, pet2Btn, pet3Btn, pet4Btn};
+        petButtons = new Button[]{pet1Btn, pet2Btn, pet3Btn, pet4Btn, pet5Btn};
 
         for (int i = 0; i < petButtons.length; i++) {
             final int idx = i;
@@ -160,7 +162,7 @@ public class HomeController {
 
     private void loadEnemyPet() {
         try {
-            var stream = getClass().getResourceAsStream("/images/pet2.png");
+            var stream = getClass().getResourceAsStream("/images/enemy.png");
             if (stream != null) enemyPetImage.setImage(new Image(stream));
         } catch (Exception e) {
             System.out.println("Enemy pet tidak ditemukan.");

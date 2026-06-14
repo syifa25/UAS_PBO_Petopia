@@ -48,16 +48,15 @@ public class ArenaController {
 
     // Pet data mapping (nama, image, level, maxHp, attack, defense)
     private static final Object[][] PET_DATA = {
-            {"RISSOLE CAT", "/images/pet1.png", 15, 120, 18, 6},
-            {"GRIZZLY BEAR", "/images/pet2.png", 12, 120, 20, 8},
-            {"AQUA SLIME", "/images/pet4.png", 5, 80, 12, 4},
-            {"AQUA SLIME", "/images/pet4.png", 5, 80, 12, 4},
+            {"DOG",          "/images/pet1.png",          10, 110, 15, 5},
+            {"RISOL CAT",    "/images/risol_mayo_cat.png", 15, 120, 18, 6},
+            {"CAT",          "/images/pet2.png",           12, 115, 17, 7},
+            {"AQUA SLIME",   "/images/slime_ijo.png",       5,  80, 12, 4},
+            {"SWIFT BIRD",   "/images/burung.png",           8, 100, 16, 5},
     };
 
     private static final Object[][] ENEMY_DATA = {
-            {"STRAY DOG", "/images/pet3.png", 10, 110, 16, 6},
-            {"WILD SLIME", "/images/slime_ijo.png", 8, 95, 14, 5},
-            {"BURUNG", "/images/burung.png", 9, 100, 15, 5},
+            {"WILD BEAR", "/images/enemy.png", 10, 110, 16, 6},
     };
 
     @FXML

@@ -89,7 +89,7 @@
 
             <!-- LEFT: pet selector -->
             <VBox styleClass="pet-selector-box" spacing="8"
-                  alignment="TOP_LEFT" prefWidth="256" prefHeight="100">
+                  alignment="TOP_LEFT" prefWidth="310" prefHeight="100">
                 <Label text="SELECT YOUR PET" styleClass="selector-label"/>
                 <HBox spacing="6" alignment="CENTER_LEFT">
                     <Button fx:id="pet1Btn" styleClass="pet-btn pet-btn-selected"
@@ -99,6 +99,8 @@
                     <Button fx:id="pet3Btn" styleClass="pet-btn"
                             prefWidth="48" prefHeight="48"/>
                     <Button fx:id="pet4Btn" styleClass="pet-btn"
+                            prefWidth="48" prefHeight="48"/>
+                    <Button fx:id="pet5Btn" styleClass="pet-btn"
                             prefWidth="48" prefHeight="48"/>
                 </HBox>
             </VBox>
