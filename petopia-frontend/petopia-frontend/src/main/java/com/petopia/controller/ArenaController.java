@@ -66,6 +66,10 @@ public class ArenaController {
     private Pet enemyPet;
     private int savedPlayerPetIndex = 0;
 
+    // ── Message queue — shows each log line for 1.5s before the next ──
+    private final java.util.Queue<String> logQueue = new java.util.LinkedList<>();
+    private boolean logBusy = false;
+
     // ── Pet / Enemy data ────────────────────────────────────
     private static final Object[][] PET_DATA = {
             {"DOG",        "/images/pet1.png",          10, 110, 15, 5},
@@ -128,6 +132,8 @@ public class ArenaController {
 
         potionLabel.setText("POTION (1)");
         resultOverlay.setVisible(false);
+        logQueue.clear();
+        logBusy = false;
 
         // Wire buttons
         attackBtn.setOnAction(e -> onPlayerAttack());
@@ -346,8 +352,21 @@ public class ArenaController {
     // ════════════════════════════════════════════════════════
     // HELPERS
     // ════════════════════════════════════════════════════════
+
+    /** Queue a log message — each shows for 1.5s before the next appears */
     private void setLog(String text) {
-        battleLog.setText(text);
+        logQueue.add(text);
+        if (!logBusy) drainLogQueue();
+    }
+
+    private void drainLogQueue() {
+        if (logQueue.isEmpty()) { logBusy = false; return; }
+        logBusy = true;
+        String next = logQueue.poll();
+        battleLog.setText(next);
+        PauseTransition hold = new PauseTransition(Duration.millis(1500));
+        hold.setOnFinished(e -> drainLogQueue());
+        hold.play();
     }
 
     private void disableActions(boolean disabled) {
