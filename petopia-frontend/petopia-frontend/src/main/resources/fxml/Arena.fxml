@@ -29,7 +29,8 @@
             <AnchorPane styleClass="battle-sky" prefHeight="220">
                 <!-- VS text in center -->
                 <Label text="VS" styleClass="battle-vs-text"
-                       AnchorPane.topAnchor="60" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+                       AnchorPane.topAnchor="80" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+                       maxWidth="Infinity" alignment="CENTER"/>
 
                 <!-- Player side -->
                 <VBox spacing="6" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="40">
@@ -57,8 +58,8 @@
 
                 <!-- Enemy HP (right) -->
                 <VBox spacing="4" AnchorPane.topAnchor="16" AnchorPane.rightAnchor="40">
-                    <Label text="HP" styleClass="battle-hp-label"/>
-                    <HBox spacing="8" alignment="CENTER_RIGHT">
+                    <Label text="HP" styleClass="battle-hp-label" maxWidth="Infinity" alignment="CENTER_RIGHT"/>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
                         <Label fx:id="enemyHpLabel" text="110/110" styleClass="battle-hp-text"/>
                         <ProgressBar fx:id="enemyHpBar" prefWidth="180" styleClass="battle-hp-bar"/>
                     </HBox>

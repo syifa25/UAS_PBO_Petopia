@@ -640,6 +640,7 @@
     -fx-font-weight: bold;
     -fx-effect: dropshadow(one-pass-box, #7A4400, 0, 3, 3, 0);
     -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
 }
 
 .battle-pet-name {
