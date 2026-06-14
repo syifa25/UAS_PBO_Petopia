@@ -118,6 +118,11 @@ public class LeaderboardController {
         leaderboardTable.setItems(data);
     }
 
+    @FXML
+    public void goToHome() {
+        navigateTo("/fxml/Home.fxml", backHomeBtn);
+    }
+
     private void navigateTo(String fxmlPath, Node source) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

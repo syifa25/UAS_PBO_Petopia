@@ -4,47 +4,66 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.petopia.controller.LoginController"
-      styleClass="login-root"
-      alignment="CENTER" spacing="20">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.petopia.controller.LoginController"
+           styleClass="login-root"
+           prefWidth="1000" prefHeight="700">
 
-    <!-- Main Container -->
-    <VBox styleClass="login-container" alignment="TOP_CENTER" spacing="20" prefWidth="500" prefHeight="600">
+    <!-- Centered dialog panel -->
+    <VBox styleClass="login-container" alignment="TOP_CENTER" spacing="0"
+          prefWidth="440" maxWidth="440">
 
-        <!-- Title -->
-        <VBox alignment="CENTER" spacing="4" VBox.vgrow="NEVER" prefHeight="100">
+        <!-- HEADER -->
+        <VBox alignment="CENTER" spacing="6" style="-fx-padding: 20 0 14 0;">
             <Label text="PETOPIA ACCOUNT" styleClass="login-title"/>
-            <Label text="LOGIN" styleClass="login-subtitle"/>
+            <Label text="LOGIN"           styleClass="login-subtitle"/>
         </VBox>
 
-        <!-- Form -->
-        <VBox alignment="CENTER" spacing="16" VBox.vgrow="ALWAYS" styleClass="login-form">
+        <!-- Pixel divider -->
+        <Pane styleClass="pixel-divider" prefWidth="380"/>
+
+        <!-- FORM -->
+        <VBox alignment="CENTER_LEFT" spacing="14" styleClass="login-form"
+              style="-fx-padding: 18 0 10 0;">
 
             <!-- Username -->
-            <VBox spacing="8">
-                <Label text="Username:" styleClass="login-label"/>
-                <TextField fx:id="usernameField" styleClass="login-input" promptText="Enter username"/>
+            <VBox spacing="6" maxWidth="Infinity">
+                <Label text="USERNAME" styleClass="login-label"/>
+                <TextField fx:id="usernameField" styleClass="login-input"
+                           promptText="ENTER NAME..."
+                           maxWidth="Infinity"/>
             </VBox>
 
             <!-- Password -->
-            <VBox spacing="8">
-                <Label text="Password:" styleClass="login-label"/>
-                <PasswordField fx:id="passwordField" styleClass="login-input" promptText="Enter password"/>
+            <VBox spacing="6" maxWidth="Infinity">
+                <Label text="PASSWORD" styleClass="login-label"/>
+                <PasswordField fx:id="passwordField" styleClass="login-input"
+                               promptText="ENTER PASSWORD..."
+                               maxWidth="Infinity"/>
             </VBox>
 
-            <!-- Error message -->
-            <Label fx:id="errorLabel" styleClass="login-error" text=""/>
+            <!-- Error -->
+            <Label fx:id="errorLabel" styleClass="login-error" text="" wrapText="true"/>
 
-            <!-- Login Button -->
-            <Button fx:id="loginBtn" text="LOGIN" styleClass="login-button" prefHeight="50"/>
+            <!-- Login button -->
+            <Button fx:id="loginBtn" text="PRESS START  ▶"
+                    styleClass="login-button" maxWidth="Infinity"
+                    prefHeight="48"/>
 
-            <!-- Register Link & Demo -->
-            <VBox alignment="CENTER" spacing="12">
-                <Hyperlink text="New here? Create your account!" styleClass="register-link" onAction="#goToRegister"/>
-                <Hyperlink text="← Back to Home" styleClass="register-link" onAction="#goToHome"/>
-            </VBox>
         </VBox>
+
+        <!-- Pixel divider -->
+        <Pane styleClass="pixel-divider" prefWidth="380"/>
+
+        <!-- LINKS -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 14 0 20 0;">
+            <Hyperlink text="NEW HERE?  CREATE YOUR ACCOUNT"
+                       styleClass="register-link" onAction="#goToRegister"/>
+            <Hyperlink text="←  BACK TO HOME"
+                       styleClass="register-link" onAction="#goToHome"/>
+        </VBox>
+
     </VBox>
-</VBox>
+
+</StackPane>

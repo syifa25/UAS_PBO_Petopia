@@ -8,7 +8,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.petopia.controller.MyPetsController"
-      styleClass="mypets-root"
+      styleClass="root-bg"
       prefWidth="1000" prefHeight="700">
 
     <!-- NAVBAR -->
@@ -20,11 +20,11 @@
     </HBox>
 
     <!-- OUTER FRAME -->
-    <StackPane VBox.vgrow="ALWAYS" alignment="CENTER">
+    <StackPane VBox.vgrow="ALWAYS" alignment="CENTER" style="-fx-padding: 16;">
 
-        <!-- WOOD PANEL -->
-        <VBox styleClass="wood-panel" prefWidth="900" maxWidth="900"
-              alignment="CENTER" spacing="12">
+        <!-- MAIN PANEL -->
+        <VBox styleClass="wood-panel" prefWidth="920" maxWidth="920"
+              alignment="CENTER" spacing="14">
 
             <!-- CORNER DECORATIONS (simulasi dengan label) -->
 
