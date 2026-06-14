@@ -43,6 +43,7 @@
             <!-- Register Link & Demo -->
             <VBox alignment="CENTER" spacing="12">
                 <Hyperlink text="New here? Create your account!" styleClass="register-link" onAction="#goToRegister"/>
+                <Hyperlink text="← Back to Home" styleClass="register-link" onAction="#goToHome"/>
             </VBox>
         </VBox>
     </VBox>

@@ -103,4 +103,17 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void goToHome() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Home.fxml"));
+            Stage stage = (Stage) loginBtn.getScene().getWindow();
+            Scene scene = new Scene(loader.load(), 1000, 700);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -14,8 +14,8 @@ public class MyPetsController {
 
     @FXML private Button navHome;
     @FXML private Button navMyPets;
-    @FXML private Button navMarketplace;
-    @FXML private Button navWWW;
+    @FXML private Button navLeaderboard;
+    @FXML private Button navLogin;
     @FXML private Button goToArenaBtn;
 
     @FXML private ImageView pet1Image;
@@ -30,7 +30,20 @@ public class MyPetsController {
 
         navHome.setOnAction(e -> navigateTo("/fxml/Home.fxml", navHome));
         navMyPets.setOnAction(e -> navigateTo("/fxml/MyPets.fxml", navMyPets));
-        navMarketplace.setOnAction(e -> navigateTo("/fxml/Marketplace.fxml", navMarketplace));
+        navLeaderboard.setOnAction(e -> navigateTo("/fxml/Leaderboard.fxml", navLeaderboard));
+
+        if (com.petopia.model.Session.isLoggedIn()) {
+            navLogin.setText(com.petopia.model.Session.getDisplayName() != null && !com.petopia.model.Session.getDisplayName().isBlank()
+                    ? com.petopia.model.Session.getDisplayName().toUpperCase()
+                    : com.petopia.model.Session.getUsername().toUpperCase());
+            navLogin.setOnAction(e -> {
+                com.petopia.model.Session.logout();
+                navigateTo("/fxml/Login.fxml", navLogin);
+            });
+        } else {
+            navLogin.setText("LOGIN");
+            navLogin.setOnAction(e -> navigateTo("/fxml/Login.fxml", navLogin));
+        }
     }
 
     @FXML
