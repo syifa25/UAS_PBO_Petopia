@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.petopia.controller.LoginController"
+      styleClass="login-root"
+      alignment="CENTER" spacing="20">
+
+    <!-- Main Container -->
+    <VBox styleClass="login-container" alignment="TOP_CENTER" spacing="20" prefWidth="500" prefHeight="600">
+
+        <!-- Title -->
+        <VBox alignment="CENTER" spacing="4" VBox.vgrow="NEVER" prefHeight="100">
+            <Label text="PETOPIA ACCOUNT" styleClass="login-title"/>
+            <Label text="LOGIN" styleClass="login-subtitle"/>
+        </VBox>
+
+        <!-- Form -->
+        <VBox alignment="CENTER" spacing="16" VBox.vgrow="ALWAYS" styleClass="login-form">
+
+            <!-- Username -->
+            <VBox spacing="8">
+                <Label text="Username:" styleClass="login-label"/>
+                <TextField fx:id="usernameField" styleClass="login-input" promptText="Enter username"/>
+            </VBox>
+
+            <!-- Password -->
+            <VBox spacing="8">
+                <Label text="Password:" styleClass="login-label"/>
+                <PasswordField fx:id="passwordField" styleClass="login-input" promptText="Enter password"/>
+            </VBox>
+
+            <!-- Error message -->
+            <Label fx:id="errorLabel" styleClass="login-error" text=""/>
+
+            <!-- Login Button -->
+            <Button fx:id="loginBtn" text="LOGIN" styleClass="login-button" prefHeight="50"/>
+
+            <!-- Register Link & Demo -->
+            <VBox alignment="CENTER" spacing="12">
+                <Hyperlink text="New here? Create your account!" styleClass="register-link" onAction="#goToRegister"/>
+            </VBox>
+        </VBox>
+    </VBox>
+</VBox>

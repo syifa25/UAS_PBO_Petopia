@@ -606,3 +606,251 @@
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
+
+/* =====================
+   BATTLE VIEW STYLES
+   ===================== */
+.battle-container {
+    -fx-background-color: #C8A86B;
+    -fx-spacing: 8;
+    -fx-padding: 8;
+}
+
+.battle-arena-box {
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 4;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 6, 0, 3, 3);
+}
+
+.battle-sky {
+    -fx-background-color: #7EC8E3;
+    -fx-border-color: #5A8A2A;
+    -fx-border-width: 0 0 4 0;
+}
+
+.battle-ground {
+    -fx-background-color: #5A8A2A;
+}
+
+.battle-vs-text {
+    -fx-text-fill: #FF9900;
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(one-pass-box, #7A4400, 0, 3, 3, 0);
+    -fx-text-alignment: CENTER;
+}
+
+.battle-pet-name {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: CENTER;
+}
+
+.battle-hp-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.battle-hp-bar {
+    -fx-accent: #28B428;
+    -fx-control-inner-background: #333333;
+}
+
+.battle-hp-text {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-min-width: 70;
+}
+
+.battle-log {
+    -fx-control-inner-background: #3D2010;
+    -fx-text-fill: #C8A040;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 11px;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 3;
+    -fx-padding: 8;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 4, 0, 2, 2);
+}
+
+.battle-actions {
+    -fx-background-color: #C8A86B;
+    -fx-padding: 12;
+}
+
+.battle-action-btn {
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 3;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-font-family: "Courier New", monospace;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 4, 0, 2, 2);
+}
+
+.battle-action-btn:hover {
+    -fx-border-color: #3A1F00;
+}
+
+.battle-action-btn:pressed {
+    -fx-translate-y: 2;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 2, 0, 1, 1);
+}
+
+.attack-btn {
+    -fx-background-color: #F0A000;
+}
+
+.attack-btn:hover {
+    -fx-background-color: #FFB820;
+}
+
+.potion-btn {
+    -fx-background-color: #7EC8E3;
+}
+
+.potion-btn:hover {
+    -fx-background-color: #9EDDE8;
+}
+
+.flee-btn {
+    -fx-background-color: #C8A86B;
+}
+
+.flee-btn:hover {
+    -fx-background-color: #D8B87A;
+}
+
+.battle-btn-icon {
+    -fx-font-size: 18px;
+}
+
+.battle-btn-label {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+/* =====================
+   LOGIN & REGISTER STYLES
+   ===================== */
+.login-root {
+    -fx-background-color: #C8A86B;
+}
+
+.login-container {
+    -fx-background-color: #B08030;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 4;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 30;
+    -fx-max-width: 550;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 8, 0, 3, 3);
+}
+
+.login-title {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Courier New", monospace;
+}
+
+.login-subtitle {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Courier New", monospace;
+}
+
+.login-form {
+    -fx-padding: 20;
+}
+
+.login-label {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Courier New", monospace;
+}
+
+.login-input {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 2;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 10;
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 12px;
+    -fx-text-fill: #3A1F00;
+    -fx-prompt-text-fill: #CCCCCC;
+}
+
+.login-input:focused {
+    -fx-border-color: #3A1F00;
+    -fx-border-width: 3;
+}
+
+.login-error {
+    -fx-text-fill: #DD0000;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Courier New", monospace;
+    -fx-min-height: 16;
+}
+
+.login-button {
+    -fx-background-color: #D4AF37;
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Courier New", monospace;
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 3;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(one-pass-box, #5A3A00, 4, 0, 2, 2);
+}
+
+.login-button:hover {
+    -fx-background-color: #E8C547;
+}
+
+.login-button:pressed {
+    -fx-background-color: #B8860B;
+    -fx-translate-y: 1;
+}
+
+.register-link {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 12px;
+    -fx-font-family: "Courier New", monospace;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.register-link:hover {
+    -fx-text-fill: #1A0F00;
+}
+
+.demo-box {
+    -fx-border-color: #7A5C10;
+    -fx-border-width: 2;
+    -fx-border-style: dashed;
+    -fx-border-radius: 4;
+    -fx-background-color: transparent;
+    -fx-padding: 8;
+}
+
+.demo-text {
+    -fx-text-fill: #3A1F00;
+    -fx-font-size: 11px;
+    -fx-font-family: "Courier New", monospace;
+}

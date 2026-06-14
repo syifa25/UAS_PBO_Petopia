@@ -1,14 +1,22 @@
 package com.petopia.controller;
 
+import com.petopia.battle.BattleEvent;
+import com.petopia.battle.BattleService;
+import com.petopia.db.DatabaseUtil;
+import com.petopia.model.Pet;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.time.Instant;
 
 public class ArenaController {
 
@@ -17,73 +25,158 @@ public class ArenaController {
     @FXML private Button navMarketplace;
     @FXML private Button backHomeBtn;
 
-    @FXML private ImageView swordIconLeft;
-    @FXML private ImageView swordIconRight;
+    @FXML private ImageView playerImage;
+    @FXML private ImageView enemyImage;
 
-    @FXML private ImageView fighter1Image;
-    @FXML private ImageView fighter2Image;
-    @FXML private ImageView fighter3Image;
+    @FXML private Label playerName;
+    @FXML private Label enemyName;
 
-    @FXML private ImageView swordStat1, swordStat2, swordStat3;
-    @FXML private ImageView protectStat1, protectStat2, protectStat3;
-    @FXML private ImageView loveStat1, loveStat2, loveStat3;
+    @FXML private ProgressBar playerHpBar;
+    @FXML private ProgressBar enemyHpBar;
+    @FXML private Label playerHpLabel;
+    @FXML private Label enemyHpLabel;
 
-    @FXML private VBox card1;
-    @FXML private VBox card2;
-    @FXML private VBox card3;
+    @FXML private TextArea battleLog;
+    @FXML private Button attackBtn;
+    @FXML private Button potionBtn;
+    @FXML private Button fleeBtn;
+
+    private BattleService battleService;
+    private Pet playerPet;
+    private Pet enemyPet;
+
+    // Pet data mapping (nama, image, level, maxHp, attack, defense)
+    private static final Object[][] PET_DATA = {
+            {"RISSOLE CAT", "/images/pet1.png", 15, 120, 18, 6},
+            {"GRIZZLY BEAR", "/images/pet2.png", 12, 120, 20, 8},
+            {"AQUA SLIME", "/images/pet4.png", 5, 80, 12, 4},
+            {"AQUA SLIME", "/images/pet4.png", 5, 80, 12, 4},
+    };
+
+    private static final Object[][] ENEMY_DATA = {
+            {"STRAY DOG", "/images/pet3.png", 10, 110, 16, 6},
+            {"WILD SLIME", "/images/slime_ijo.png", 8, 95, 14, 5},
+            {"BURUNG", "/images/burung.png", 9, 100, 15, 5},
+    };
 
     @FXML
     public void initialize() {
-        // Title sword icons
-        loadImage(swordIconLeft,  "/images/pedang.png");
-        loadImage(swordIconRight, "/images/pedang.png");
-
-        // Pet images
-        loadImage(fighter1Image, "/images/pet1.png");
-        loadImage(fighter2Image, "/images/pet2.png");
-        loadImage(fighter3Image, "/images/pet4.png");
-
-        // Stat icons — semua card pakai gambar yang sama
-        String[] statPaths = {"/images/pedang.png", "/images/protect.png", "/images/love.png"};
-
-        loadImage(swordStat1,   statPaths[0]);
-        loadImage(protectStat1, statPaths[1]);
-        loadImage(loveStat1,    statPaths[2]);
-
-        loadImage(swordStat2,   statPaths[0]);
-        loadImage(protectStat2, statPaths[1]);
-        loadImage(loveStat2,    statPaths[2]);
-
-        loadImage(swordStat3,   statPaths[0]);
-        loadImage(protectStat3, statPaths[1]);
-        loadImage(loveStat3,    statPaths[2]);
-
-        // Navbar
         navHome.setOnAction(e -> navigateTo("/fxml/Home.fxml", navHome));
         navMyPets.setOnAction(e -> navigateTo("/fxml/MyPets.fxml", navMyPets));
         navMarketplace.setOnAction(e -> navigateTo("/fxml/Marketplace.fxml", navMarketplace));
     }
 
-    @FXML private void selectCard1() { selectCard(card1); }
-    @FXML private void selectCard2() { selectCard(card2); }
-    @FXML private void selectCard3() { selectCard(card3); }
+    public void initBattle(int playerPetIndex) {
+        // Create player pet dari data
+        Object[] playerData = PET_DATA[Math.min(playerPetIndex, PET_DATA.length - 1)];
+        playerPet = new Pet(
+                (String) playerData[0],
+                (String) playerData[1],
+                (Integer) playerData[2],
+                (Integer) playerData[3],
+                (Integer) playerData[4],
+                (Integer) playerData[5]
+        );
 
-    private void selectCard(VBox card) {
-        card1.getStyleClass().remove("fighter-card-selected");
-        card2.getStyleClass().remove("fighter-card-selected");
-        card3.getStyleClass().remove("fighter-card-selected");
-        card.getStyleClass().add("fighter-card-selected");
+        // Pilih enemy random
+        int enemyIdx = (int) (Math.random() * ENEMY_DATA.length);
+        Object[] enemyData = ENEMY_DATA[enemyIdx];
+        enemyPet = new Pet(
+                (String) enemyData[0],
+                (String) enemyData[1],
+                (Integer) enemyData[2],
+                (Integer) enemyData[3],
+                (Integer) enemyData[4],
+                (Integer) enemyData[5]
+        );
+
+        // Setup UI
+        loadImage(playerImage, playerPet.getImagePath());
+        loadImage(enemyImage, enemyPet.getImagePath());
+        playerName.setText(playerPet.getName());
+        enemyName.setText(enemyPet.getName());
+
+        // Initialize HP display
+        playerHpLabel.setText(playerPet.getHp() + " / " + playerPet.getMaxHp());
+        enemyHpLabel.setText(enemyPet.getHp() + " / " + enemyPet.getMaxHp());
+        playerHpBar.setProgress(1.0);
+        enemyHpBar.setProgress(1.0);
+
+        battleLog.clear();
+
+        battleService = new BattleService(playerPet, enemyPet, this::onBattleEvent);
+
+        // Wire action buttons
+        attackBtn.setOnAction(e -> {
+            disableActions(true);
+            battleService.playerAttack();
+            disableActions(false);
+        });
+        potionBtn.setOnAction(e -> {
+            disableActions(true);
+            battleService.playerUsePotion();
+            disableActions(false);
+        });
+        fleeBtn.setOnAction(e -> {
+            disableActions(true);
+            battleService.playerFlee();
+            disableActions(false);
+        });
+
+        battleService.start();
     }
 
-    @FXML
-    private void goToHome() {
-        navigateTo("/fxml/Home.fxml", backHomeBtn);
+    private void onBattleEvent(BattleEvent ev) {
+        Platform.runLater(() -> {
+            switch (ev.getType()) {
+                case LOG:
+                    appendLog(ev.getMessage());
+                    break;
+                case HP_UPDATE:
+                    if (ev.getActor() == 0) {
+                        playerHpBar.setProgress((double) ev.getHp() / ev.getMaxHp());
+                        playerHpLabel.setText(ev.getHp() + " / " + ev.getMaxHp());
+                    } else {
+                        enemyHpBar.setProgress((double) ev.getHp() / ev.getMaxHp());
+                        enemyHpLabel.setText(ev.getHp() + " / " + ev.getMaxHp());
+                    }
+                    break;
+                case BATTLE_END:
+                    appendLog("=== " + ev.getMessage() + " ===");
+                    disableActions(true);
+                    saveBattleResultToDb(ev.getMessage());
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Battle Result");
+                    alert.setHeaderText("Battle Finished");
+                    alert.setContentText(ev.getMessage());
+                    alert.showAndWait();
+                    break;
+            }
+        });
+    }
+
+    private void appendLog(String text) {
+        if (battleLog.getText().isEmpty()) {
+            battleLog.setText(text);
+        } else {
+            battleLog.appendText("\n" + text);
+        }
+        // Auto-scroll ke bawah
+        battleLog.setScrollTop(Double.MAX_VALUE);
+    }
+
+    private void disableActions(boolean disabled) {
+        attackBtn.setDisable(disabled);
+        potionBtn.setDisable(disabled);
+        fleeBtn.setDisable(disabled);
     }
 
     private void loadImage(ImageView iv, String path) {
         try {
             var stream = getClass().getResourceAsStream(path);
-            if (stream != null) iv.setImage(new Image(stream));
+            if (stream != null) {
+                iv.setImage(new Image(stream));
+            }
         } catch (Exception e) {
             System.out.println("Image not found: " + path);
         }
@@ -100,6 +193,25 @@ public class ArenaController {
             stage.setScene(scene);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void goToHome() {
+        navigateTo("/fxml/Home.fxml", backHomeBtn);
+    }
+
+    private void saveBattleResultToDb(String result) {
+        try (Connection conn = DatabaseUtil.getConnection()) {
+            String sql = "INSERT INTO battles (player_id, opponent_name, winner, duration_ms) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setObject(1, null);
+                ps.setString(2, enemyPet.getName());
+                ps.setString(3, result);
+                ps.setLong(4, 0L);
+                ps.executeUpdate();
+            }
+        } catch (Exception e) {
+            System.out.println("Warning: Failed to save battle result: " + e.getMessage());
         }
     }
 }

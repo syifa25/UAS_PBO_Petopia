@@ -3,6 +3,7 @@ package com.petopia.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -70,7 +71,7 @@ public class HomeController {
         loadEnemyPet();
 
         // ===== BATTLE BUTTON =====
-        battleButton.setOnAction(e -> navigateTo("/fxml/Arena.fxml", battleButton));
+        battleButton.setOnAction(e -> navigateTo("/fxml/Arena.fxml", battleButton, selectedPetIndex));
 
         // ===== HOW TO PLAY =====
         howToPlayBtn.setOnAction(e -> {
@@ -89,17 +90,39 @@ public class HomeController {
     }
 
     // ===== NAVIGASI =====
+    // Versi lama tanpa petIndex (agar semua panggilan sekarang tetap bekerja)
     private void navigateTo(String fxmlPath, Node source) {
+        navigateTo(fxmlPath, source, null);
+    }
+
+    // Versi yang menerima optional petIndex dan meneruskan data ke controller target
+    private void navigateTo(String fxmlPath, Node source, Integer selectedPetIndex) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Object controller = loader.getController();
+            if (controller != null) {
+                // Jika controller adalah ArenaController, panggil initBattle
+                if (controller instanceof ArenaController && selectedPetIndex != null) {
+                    ((ArenaController) controller).initBattle(selectedPetIndex);
+                }
+            }
+
             Stage stage = (Stage) source.getScene().getWindow();
-            Scene scene = new Scene(loader.load(), 1000, 700);
+            Scene scene = new Scene(root, 1000, 700);
             scene.getStylesheets().add(
                     getClass().getResource("/css/style.css").toExternalForm()
             );
             stage.setScene(scene);
         } catch (Exception ex) {
             ex.printStackTrace();
+            // opsional: tampilkan alert agar user tahu ada error saat loading
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Load Error");
+            alert.setHeaderText("Gagal memuat halaman");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
         }
     }
 

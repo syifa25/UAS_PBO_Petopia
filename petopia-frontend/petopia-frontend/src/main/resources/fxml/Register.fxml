@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.petopia.controller.RegisterController"
+      styleClass="login-root"
+      alignment="CENTER" spacing="20">
+
+    <!-- Main Container -->
+    <VBox styleClass="login-container" alignment="TOP_CENTER" spacing="20" prefWidth="500" prefHeight="650">
+
+        <!-- Title -->
+        <VBox alignment="CENTER" spacing="4" VBox.vgrow="NEVER" prefHeight="100">
+            <Label text="PETOPIA ACCOUNT" styleClass="login-title"/>
+            <Label text="CREATE ACCOUNT" styleClass="login-subtitle"/>
+        </VBox>
+
+        <!-- Form -->
+        <VBox alignment="CENTER" spacing="14" VBox.vgrow="ALWAYS" styleClass="login-form">
+
+            <!-- Username -->
+            <VBox spacing="6">
+                <Label text="Username:" styleClass="login-label"/>
+                <TextField fx:id="usernameField" styleClass="login-input" promptText="Choose a username"/>
+            </VBox>
+
+            <!-- Display Name -->
+            <VBox spacing="6">
+                <Label text="Display Name:" styleClass="login-label"/>
+                <TextField fx:id="displayNameField" styleClass="login-input" promptText="Your trainer name"/>
+            </VBox>
+
+            <!-- Password -->
+            <VBox spacing="6">
+                <Label text="Password:" styleClass="login-label"/>
+                <PasswordField fx:id="passwordField" styleClass="login-input" promptText="Create password"/>
+            </VBox>
+
+            <!-- Confirm Password -->
+            <VBox spacing="6">
+                <Label text="Confirm Password:" styleClass="login-label"/>
+                <PasswordField fx:id="confirmPasswordField" styleClass="login-input" promptText="Confirm password"/>
+            </VBox>
+
+            <!-- Error message -->
+            <Label fx:id="errorLabel" styleClass="login-error" text=""/>
+
+            <!-- Register Button -->
+            <Button fx:id="registerBtn" text="CREATE ACCOUNT" styleClass="login-button" prefHeight="50"/>
+
+            <!-- Back to Login -->
+            <Hyperlink text="Already have account? Login here" styleClass="register-link" onAction="#goToLogin"/>
+        </VBox>
+    </VBox>
+</VBox>
