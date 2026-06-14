@@ -23,16 +23,16 @@
         <VBox styleClass="wood-panel" prefWidth="950" maxWidth="950"
               alignment="CENTER" spacing="12">
 
-            <Label text="MY PETS"                              styleClass="mypets-title"/>
+            <Label text="MY PETS" styleClass="mypets-title"/>
             <Label text="HERE ARE YOUR BELOVED COMPANIONS, TRAINER!" styleClass="mypets-subtitle"/>
 
-            <!-- 5 pet cards in one row -->
+            <!-- 5 pet cards -->
             <HBox spacing="12" alignment="CENTER">
 
                 <!-- CARD 1 — DOG -->
                 <VBox styleClass="pet-card" prefWidth="170" spacing="0">
                     <StackPane styleClass="card-img-area-grass" prefHeight="160">
-                        <Pane styleClass="card-sky-blue"   prefWidth="170"/>
+                        <Pane styleClass="card-sky-blue"     prefWidth="170"/>
                         <Pane styleClass="card-ground-green" prefWidth="170" prefHeight="50"
                               StackPane.alignment="BOTTOM_CENTER"/>
                         <ImageView fx:id="pet1Image" fitWidth="90" fitHeight="90"
@@ -41,23 +41,21 @@
                         <Label text="READY" styleClass="badge badge-ready"
                                StackPane.alignment="TOP_RIGHT" translateX="-4" translateY="4"/>
                     </StackPane>
-                    <VBox styleClass="card-info" spacing="2" prefHeight="68">
-                        <Label text="DOG"    styleClass="card-info-text"/>
-                        <Label text="LVL: 10" styleClass="card-info-text"/>
-                        <Label text="READY"  styleClass="card-info-text card-status-ready"/>
+                    <VBox styleClass="card-info" spacing="2" prefHeight="90">
+                        <Label text="DOG"             styleClass="card-info-text"/>
+                        <Label fx:id="p1Level"  text="LVL: 10"      styleClass="card-info-text"/>
+                        <Label fx:id="p1Exp"    text="EXP: 0/100"   styleClass="card-info-text card-status-training"/>
+                        <Label fx:id="p1Stats"  text="ATK:15 DEF:5" styleClass="card-info-text"/>
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
-                        <Button styleClass="act-btn" onAction="#feedPet1"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="feed1Btn"  styleClass="act-btn" onAction="#feedPet1"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="FEED"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#playPet1"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="play1Btn"  styleClass="act-btn" onAction="#playPet1"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="PLAY"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#trainPet1" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="train1Btn" styleClass="act-btn" onAction="#trainPet1" prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="TRAIN" styleClass="act-label"/></VBox></graphic>
                         </Button>
                     </HBox>
                 </VBox>
@@ -74,23 +72,21 @@
                         <Label text="READY" styleClass="badge badge-ready"
                                StackPane.alignment="TOP_RIGHT" translateX="-4" translateY="4"/>
                     </StackPane>
-                    <VBox styleClass="card-info" spacing="2" prefHeight="68">
-                        <Label text="RISOL CAT" styleClass="card-info-text"/>
-                        <Label text="LVL: 15"   styleClass="card-info-text"/>
-                        <Label text="READY"     styleClass="card-info-text card-status-ready"/>
+                    <VBox styleClass="card-info" spacing="2" prefHeight="90">
+                        <Label text="RISOL CAT"       styleClass="card-info-text"/>
+                        <Label fx:id="p2Level"  text="LVL: 15"      styleClass="card-info-text"/>
+                        <Label fx:id="p2Exp"    text="EXP: 0/100"   styleClass="card-info-text card-status-training"/>
+                        <Label fx:id="p2Stats"  text="ATK:18 DEF:6" styleClass="card-info-text"/>
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
-                        <Button styleClass="act-btn" onAction="#feedPet2"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="feed2Btn"  styleClass="act-btn" onAction="#feedPet2"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="FEED"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#playPet2"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="play2Btn"  styleClass="act-btn" onAction="#playPet2"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="PLAY"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#trainPet2" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="train2Btn" styleClass="act-btn" onAction="#trainPet2" prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="TRAIN" styleClass="act-label"/></VBox></graphic>
                         </Button>
                     </HBox>
                 </VBox>
@@ -98,7 +94,7 @@
                 <!-- CARD 3 — CAT -->
                 <VBox styleClass="pet-card" prefWidth="170" spacing="0">
                     <StackPane styleClass="card-img-area-stone" prefHeight="160">
-                        <Pane styleClass="card-sky-stone" prefWidth="170"/>
+                        <Pane styleClass="card-sky-stone"  prefWidth="170"/>
                         <Pane styleClass="card-ground-stone" prefWidth="170" prefHeight="50"
                               StackPane.alignment="BOTTOM_CENTER"/>
                         <ImageView fx:id="pet3Image" fitWidth="90" fitHeight="90"
@@ -107,23 +103,21 @@
                         <Label text="RESTING" styleClass="badge badge-resting"
                                StackPane.alignment="TOP_RIGHT" translateX="-4" translateY="4"/>
                     </StackPane>
-                    <VBox styleClass="card-info" spacing="2" prefHeight="68">
-                        <Label text="CAT"      styleClass="card-info-text"/>
-                        <Label text="LVL: 12"  styleClass="card-info-text"/>
-                        <Label text="RESTING"  styleClass="card-info-text card-status-resting"/>
+                    <VBox styleClass="card-info" spacing="2" prefHeight="90">
+                        <Label text="CAT"             styleClass="card-info-text"/>
+                        <Label fx:id="p3Level"  text="LVL: 12"      styleClass="card-info-text"/>
+                        <Label fx:id="p3Exp"    text="EXP: 0/100"   styleClass="card-info-text card-status-training"/>
+                        <Label fx:id="p3Stats"  text="ATK:17 DEF:7" styleClass="card-info-text"/>
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
-                        <Button styleClass="act-btn" onAction="#feedPet3"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="feed3Btn"  styleClass="act-btn" onAction="#feedPet3"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="FEED"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#playPet3"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="play3Btn"  styleClass="act-btn" onAction="#playPet3"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="PLAY"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#trainPet3" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="train3Btn" styleClass="act-btn" onAction="#trainPet3" prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="TRAIN" styleClass="act-label"/></VBox></graphic>
                         </Button>
                     </HBox>
                 </VBox>
@@ -131,7 +125,7 @@
                 <!-- CARD 4 — AQUA SLIME -->
                 <VBox styleClass="pet-card" prefWidth="170" spacing="0">
                     <StackPane styleClass="card-img-area-grass" prefHeight="160">
-                        <Pane styleClass="card-sky-blue"   prefWidth="170"/>
+                        <Pane styleClass="card-sky-blue"     prefWidth="170"/>
                         <Pane styleClass="card-ground-green" prefWidth="170" prefHeight="50"
                               StackPane.alignment="BOTTOM_CENTER"/>
                         <ImageView fx:id="pet4Image" fitWidth="90" fitHeight="90"
@@ -140,23 +134,21 @@
                         <Label text="IN TRAINING" styleClass="badge badge-training"
                                StackPane.alignment="TOP_RIGHT" translateX="-4" translateY="4"/>
                     </StackPane>
-                    <VBox styleClass="card-info" spacing="2" prefHeight="68">
-                        <Label text="AQUA SLIME"  styleClass="card-info-text"/>
-                        <Label text="LVL: 5"      styleClass="card-info-text"/>
-                        <Label text="IN TRAINING" styleClass="card-info-text card-status-training"/>
+                    <VBox styleClass="card-info" spacing="2" prefHeight="90">
+                        <Label text="AQUA SLIME"      styleClass="card-info-text"/>
+                        <Label fx:id="p4Level"  text="LVL: 5"       styleClass="card-info-text"/>
+                        <Label fx:id="p4Exp"    text="EXP: 0/100"   styleClass="card-info-text card-status-training"/>
+                        <Label fx:id="p4Stats"  text="ATK:12 DEF:4" styleClass="card-info-text"/>
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
-                        <Button styleClass="act-btn" onAction="#feedPet4"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="feed4Btn"  styleClass="act-btn" onAction="#feedPet4"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="FEED"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#playPet4"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="play4Btn"  styleClass="act-btn" onAction="#playPet4"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="PLAY"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#trainPet4" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="train4Btn" styleClass="act-btn" onAction="#trainPet4" prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="TRAIN" styleClass="act-label"/></VBox></graphic>
                         </Button>
                     </HBox>
                 </VBox>
@@ -173,39 +165,26 @@
                         <Label text="READY" styleClass="badge badge-ready"
                                StackPane.alignment="TOP_RIGHT" translateX="-4" translateY="4"/>
                     </StackPane>
-                    <VBox styleClass="card-info" spacing="2" prefHeight="68">
-                        <Label text="SWIFT BIRD" styleClass="card-info-text"/>
-                        <Label text="LVL: 8"     styleClass="card-info-text"/>
-                        <Label text="READY"      styleClass="card-info-text card-status-ready"/>
+                    <VBox styleClass="card-info" spacing="2" prefHeight="90">
+                        <Label text="SWIFT BIRD"      styleClass="card-info-text"/>
+                        <Label fx:id="p5Level"  text="LVL: 8"       styleClass="card-info-text"/>
+                        <Label fx:id="p5Exp"    text="EXP: 0/100"   styleClass="card-info-text card-status-training"/>
+                        <Label fx:id="p5Stats"  text="ATK:16 DEF:5" styleClass="card-info-text"/>
                     </VBox>
                     <HBox styleClass="card-actions" spacing="4" alignment="CENTER">
-                        <Button styleClass="act-btn" onAction="#feedPet5"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="FEED" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="feed5Btn"  styleClass="act-btn" onAction="#feedPet5"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="FEED"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#playPet5"  prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="PLAY" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="play5Btn"  styleClass="act-btn" onAction="#playPet5"  prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="PLAY"  styleClass="act-label"/></VBox></graphic>
                         </Button>
-                        <Button styleClass="act-btn" onAction="#trainPet5" prefWidth="46" prefHeight="38">
-                            <graphic><VBox alignment="CENTER" spacing="1">                                <Label text="TRAIN" styleClass="act-label"/>
-                            </VBox></graphic>
+                        <Button fx:id="train5Btn" styleClass="act-btn" onAction="#trainPet5" prefWidth="46" prefHeight="38">
+                            <graphic><VBox alignment="CENTER" spacing="1"><Label text="TRAIN" styleClass="act-label"/></VBox></graphic>
                         </Button>
                     </HBox>
                 </VBox>
 
             </HBox>
-
-            <!-- GO TO ARENA -->
-            <Button fx:id="goToArenaBtn" styleClass="go-arena-btn"
-                    prefWidth="260" prefHeight="60" onAction="#goToArena">
-                <graphic>
-                    <HBox alignment="CENTER" spacing="12">
-                        <Label text="GO TO ARENA" styleClass="go-arena-label"/>
-                        <Label text="⚔" styleClass="go-arena-icon"/>
-                    </HBox>
-                </graphic>
-            </Button>
 
             <VBox.margin><Insets bottom="12"/></VBox.margin>
 
